@@ -54,7 +54,7 @@ def registerMinisitesSetupHandler(context):
     from cpskin.minisite import tests
     
     filename = os.path.join(
-        os.path.dirname(tests.__file__), 
+        os.path.dirname(tests.__file__),
         'minisites_config.txt',
     )
     
