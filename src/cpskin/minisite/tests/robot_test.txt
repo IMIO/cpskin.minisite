@@ -16,6 +16,7 @@ Plone site
     Go to  http://localhost:55001/plone/
     Page should contain  Plone site
     Page should contain  This is a minisite
+    Page should contain  minisite/url
 
 
 *** Keywords ***

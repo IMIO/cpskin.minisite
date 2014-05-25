@@ -22,7 +22,14 @@
         class=".viewlet.MinisiteViewlet"
         template="viewlet.pt"
         permission="zope2.View"
-        layer=".interfaces.IThemeSpecific"
+        layer=".interfaces.IInMinisite"
         />
+
+   <adapter
+       provides="zope.publisher.interfaces.browser.IBrowserPublisher"
+       for="*
+            cpskin.minisite.interfaces.IThemeSpecific"
+       factory=".traverser.MinisiteTraverser"
+       />
 
 </configure>
