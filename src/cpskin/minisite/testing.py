@@ -10,8 +10,8 @@ import cpskin.minisite
 CPSKIN_MINISITE = PloneWithPackageLayer(
     name='CPSKIN_MINISITE',
     zcml_package=cpskin.minisite,
-    zcml_filename='configure.zcml',
-    gs_profile_id='cpskin.minisite:default',
+    zcml_filename='testing.zcml',
+    gs_profile_id='cpskin.minisite:testing',
 )
 
 CPSKIN_MINISITE_INTEGRATION_TESTING = IntegrationTesting(

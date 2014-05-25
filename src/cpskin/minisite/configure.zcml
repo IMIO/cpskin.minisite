@@ -27,15 +27,14 @@
 
    <adapter
        provides="zope.publisher.interfaces.browser.IBrowserPublisher"
-       for="*
+       for="OFS.interfaces.ITraversable
             .interfaces.IThemeSpecific"
        factory=".traverser.MinisiteTraverser"
        />
 
-   <utility
-       provides=".interfaces.IMinisite"
-       factory=".minisite.Minisite"
-       name="/plone/minisite"
+   <subscriber
+       handler=".startup.registerMinisites"
+       for="zope.processlifetime.IProcessStarting"
        />
 
 </configure>

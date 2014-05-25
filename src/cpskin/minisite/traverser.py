@@ -10,7 +10,7 @@ from cpskin.minisite.interfaces import IInMinisite
 class MinisiteTraverser(DefaultPublishTraverse):
 
     def publishTraverse(self, request, name):
-        path = "/".join(self.context.getPhysicalPath())
+        path = "/".join(self.context.getPhysicalPath() + (name,))
         minisite = queryUtility(IMinisite, name=path)
         if minisite:
             alsoProvides(request, IInMinisite)
