@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="cpskin.minisite">
 
@@ -14,5 +15,14 @@
       description="Installs the cpskin.minisite package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+
+   <browser:viewlet
+        name="cpskin.minisite"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        class=".viewlet.MinisiteViewlet"
+        template="viewlet.pt"
+        permission="zope2.View"
+        layer=".interfaces.IThemeSpecific"
+        />
 
 </configure>
