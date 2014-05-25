@@ -1,3 +1,4 @@
+from zope.interface import Interface
 from plone.theme.interfaces import IDefaultPloneLayer
 
 
@@ -9,3 +10,7 @@ class IThemeSpecific(IDefaultPloneLayer):
 class IInMinisite(IThemeSpecific):
     """Marker interface set on request after traversal in a minisite.
     """
+
+
+class IMinisite(Interface):
+    """Minisite data"""

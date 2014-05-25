@@ -28,8 +28,14 @@
    <adapter
        provides="zope.publisher.interfaces.browser.IBrowserPublisher"
        for="*
-            cpskin.minisite.interfaces.IThemeSpecific"
+            .interfaces.IThemeSpecific"
        factory=".traverser.MinisiteTraverser"
+       />
+
+   <utility
+       provides=".interfaces.IMinisite"
+       factory=".minisite.Minisite"
+       name="/plone"
        />
 
 </configure>
