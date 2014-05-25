@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
-version = '1.0'
+version = '0.1'
 
 long_description = (
-    open('README.txt').read()
+    open('README.rst').read()
     + '\n' +
-    open('CONTRIBUTORS.txt').read()
+    open('CONTRIBUTORS.rst').read()
     + '\n' +
-    open('CHANGES.txt').read()
+    open('CHANGES.rst').read()
     + '\n')
 
 setup(
@@ -30,9 +30,9 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords='',
-    author='',
-    author_email='',
-    url='http://svn.plone.org/svn/collective/',
+    author='IMIO',
+    author_email='support@imio.be',
+    url='https://github.com/imio/',
     license='gpl',
     packages=find_packages('src'),
     package_dir={'': 'src'},
