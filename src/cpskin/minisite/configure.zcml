@@ -6,17 +6,17 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="cpskin.minisite">
 
-  <five:registerPackage package="." initialize=".initialize" />
+    <five:registerPackage package="." initialize=".initialize" />
 
-  <genericsetup:registerProfile
-      name="default"
-      title="cpskin.minisite"
-      directory="profiles/default"
-      description="Installs the cpskin.minisite package"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
+    <genericsetup:registerProfile
+        name="default"
+        title="cpskin.minisite"
+        directory="profiles/default"
+        description="Installs the cpskin.minisite package"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
 
-   <browser:viewlet
+    <browser:viewlet
         name="cpskin.minisite"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
         class=".viewlet.MinisiteViewlet"
@@ -24,17 +24,17 @@
         permission="zope2.View"
         layer=".interfaces.IInMinisite"
         />
-
-   <adapter
-       provides="zope.publisher.interfaces.browser.IBrowserPublisher"
-       for="OFS.interfaces.ITraversable
+    
+    <adapter
+        provides="zope.publisher.interfaces.browser.IBrowserPublisher"
+        for="OFS.interfaces.ITraversable
             .interfaces.IThemeSpecific"
-       factory=".traverser.MinisiteTraverser"
-       />
+        factory=".traverser.MinisiteTraverser"
+        />
 
    <subscriber
-       handler=".startup.registerMinisites"
-       for="zope.processlifetime.IProcessStarting"
-       />
+        handler=".startup.registerMinisites"
+        for="zope.processlifetime.IProcessStarting"
+        />
 
 </configure>
