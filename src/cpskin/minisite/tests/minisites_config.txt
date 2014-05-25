@@ -1,0 +1,3 @@
+[http://main_portal/url]
+minisite_url = http://minisite/url
+search_path = /plone/minisite
