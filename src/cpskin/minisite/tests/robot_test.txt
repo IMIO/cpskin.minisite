@@ -12,18 +12,24 @@ ${BROWSER} =  firefox
 
 *** Test Cases ***
 
-Plone site
+Plone site does not show minisite viewlet
     [Tags]  start
     Go to  ${PLONE_URL}
     Page should contain  Plone site
     Page should not contain  This is a minisite
     Page should not contain  minisite/url
+
+Minisite does show minisite viewlet
     Enable autologin as  Manager
-    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site
+    Create content  id=minisite  type=Folder  title=Mini site
     Go to  ${PLONE_URL}/minisite
     Page should contain  Mini site
     Page should contain  This is a minisite
     Page should contain  minisite/url
+
+Subfolder of minisite does show minisite viewlet
+    Enable autologin as  Manager
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site
     Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
     Go to  ${PLONE_URL}/minisite/subfolder
     Page should contain  Subfolder
