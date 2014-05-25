@@ -1,6 +1,7 @@
 *** Settings ***
 
-Library  Selenium2Library  timeout=10  implicit_wait=0.5
+Resource  plone/app/robotframework/selenium.robot
+Library  Remote  ${PLONE_URL}/RobotRemote
 
 Suite Setup  Start browser
 Suite Teardown  Close All Browsers
@@ -13,10 +14,23 @@ ${BROWSER} =  firefox
 
 Plone site
     [Tags]  start
-    Go to  http://localhost:55001/plone/
+    Go to  ${PLONE_URL}
     Page should contain  Plone site
+    Page should not contain  This is a minisite
+    Page should not contain  minisite/url
+    Enable autologin as  Manager
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site
+    Go to  ${PLONE_URL}/minisite
+    Page should contain  Mini site
     Page should contain  This is a minisite
     Page should contain  minisite/url
+    Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
+    Go to  ${PLONE_URL}/minisite/subfolder
+    Page should contain  Subfolder
+    Page should contain  This is a minisite
+    Page should contain  minisite/url
+    #Import library  DebugLibrary
+    #Debug
 
 
 *** Keywords ***

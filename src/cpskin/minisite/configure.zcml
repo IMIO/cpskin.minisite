@@ -35,7 +35,7 @@
    <utility
        provides=".interfaces.IMinisite"
        factory=".minisite.Minisite"
-       name="/plone"
+       name="/plone/minisite"
        />
 
 </configure>

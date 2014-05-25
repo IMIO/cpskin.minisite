@@ -1,6 +1,7 @@
 from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
+from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 
 from plone.testing import z2
 
@@ -18,6 +19,6 @@ CPSKIN_MINISITE_INTEGRATION_TESTING = IntegrationTesting(
     name="CPSKIN_MINISITE_INTEGRATION_TESTING"
 )
 CPSKIN_MINISITE_FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(CPSKIN_MINISITE, z2.ZSERVER_FIXTURE),
+    bases=(CPSKIN_MINISITE, z2.ZSERVER_FIXTURE, REMOTE_LIBRARY_BUNDLE_FIXTURE),
     name="CPSKIN_MINISITE_FUNCTIONAL_TESTING"
 )
