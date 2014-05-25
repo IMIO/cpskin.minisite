@@ -1,2 +1,2 @@
 <div id="cpkin-minisite">This is a minisite</div>
-<div tal:content="request/cpskin_minisite/url" />
+<div tal:content="request/cpskin_minisite/minisite_url" />

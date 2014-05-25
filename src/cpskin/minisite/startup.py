@@ -4,7 +4,11 @@ from cpskin.minisite.minisite import Minisite
 
 
 def registerMinisites(event):
-    minisite = Minisite()
+    minisite = Minisite(
+        'http://main/domain/url',
+        'http://minisite/url',
+        'plone',
+    )
     provideUtility(
         minisite,
         name=u"/plone/minisite",
