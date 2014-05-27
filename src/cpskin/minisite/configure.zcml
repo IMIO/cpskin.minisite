@@ -40,6 +40,13 @@
         factory=".traverser.MinisiteTraverser"
         />
 
+    <adapter
+        provides="zope.publisher.interfaces.browser.IBrowserPublisher"
+        for="plone.app.imaging.interfaces.IBaseObject
+            .interfaces.IThemeSpecific"
+        factory=".traverser.MinisiteImageTraverser"
+        />
+
    <subscriber
         handler=".startup.registerMinisites"
         for="zope.processlifetime.IProcessStarting"

@@ -50,6 +50,16 @@ Subfolder of minisite does show minisite viewlet
     #Import library  DebugLibrary
     #Debug
 
+Minisite as subfolder does show minisite viewlet
+    Enable autologin as  Manager
+    ${folder}=  Create content  id=folder  type=Folder  title=Folder
+    Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
+    Go to  ${PLONE_URL}/folder/minisite
+    #Import library  DebugLibrary
+    #Debug
+    Page should contain  Mini site
+    Page should contain  This is a minisite in portal mode.
+    Page should not contain element  css=#searchbox_currentfolder_only
 
 *** Keywords ***
 

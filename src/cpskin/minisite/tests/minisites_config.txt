@@ -1,3 +1,7 @@
 [http://localhost]
 minisite_url = http://127.0.0.1
 search_path = /plone/minisite
+
+[http://localhos]
+minisite_url = http://127.0.0.1
+search_path = /plone/folder/minisite
