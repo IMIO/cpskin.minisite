@@ -7,6 +7,7 @@ from cpskin.minisite.minisite import MinisiteConfig
 
 
 def registerMinisites(event):
+    CLIENT_HOME = os.environ["CLIENT_HOME"]
     minisites_directory = os.path.join(CLIENT_HOME, 'minisites')
     if os.path.exists(minisites_directory):
         registerMinisitesFromDirectory(minisites_directory)
