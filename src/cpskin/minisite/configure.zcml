@@ -25,6 +25,14 @@
         layer=".interfaces.IInMinisite"
         />
     
+    <browser:viewlet
+        name="plone.searchbox"
+        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        class=".viewlet.SearchBoxViewlet"
+        permission="zope2.View"
+        layer=".interfaces.IInMinisite"
+        />
+    
     <adapter
         provides="zope.publisher.interfaces.browser.IBrowserPublisher"
         for="OFS.interfaces.ITraversable

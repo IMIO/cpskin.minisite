@@ -1,5 +1,4 @@
 <div id="cpkin-minisite" tal:condition="request/cpskin_minisite/is_in_portal_mode">
-  This is a minisite in portal mode.</div>
+    This is a minisite in portal mode.</div>
 <div id="cpkin-minisite" tal:condition="request/cpskin_minisite/is_in_minisite_mode">
-  This is a minisite in minisite mode.</div>
-<div tal:content="request/cpskin_minisite/minisite_url" />
+    This is a minisite in minisite mode.</div>
