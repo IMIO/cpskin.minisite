@@ -3,8 +3,7 @@ import os.path
 
 from zope.component import provideUtility
 
-from cpskin.minisite.minisite import Minisite
-
+from cpskin.minisite.minisite import MinisiteConfig
 
 
 def registerMinisites(event):
@@ -12,12 +11,14 @@ def registerMinisites(event):
     if os.path.exists(minisites_directory):
         registerMinisitesFromDirectory(minisites_directory)
 
+
 def registerMinisitesFromDirectory(directory):
     files = os.listdir(directory)
     for filename in files:
         filename = os.path.join(directory, filename)
         if os.path.isfile(filename):
-             registerMinisitesFromFile(filename)
+            registerMinisitesFromFile(filename)
+
 
 def registerMinisitesFromFile(filename):
     config = ConfigParser.RawConfigParser()
@@ -29,7 +30,7 @@ def registerMinisitesFromFile(filename):
         try:
             search_path = config.get(section, 'search_path')
             minisite_url = config.get(section, 'minisite_url')
-            minisite = Minisite(
+            minisite = MinisiteConfig(
                 main_portal_url=section,
                 minisite_url=minisite_url,
                 search_path=search_path,
@@ -52,10 +53,10 @@ def registerMinisitesSetupHandler(context):
             'register_cpskin_minisites.txt') is None:
         return
     from cpskin.minisite import tests
-    
+
     filename = os.path.join(
         os.path.dirname(tests.__file__),
         'minisites_config.txt',
     )
-    
+
     registerMinisitesFromFile(filename)

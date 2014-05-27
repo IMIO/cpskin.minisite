@@ -12,5 +12,5 @@ class IInMinisite(IThemeSpecific):
     """
 
 
-class IMinisite(Interface):
+class IMinisiteConfig(Interface):
     """Minisite data"""

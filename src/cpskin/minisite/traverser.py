@@ -1,19 +1,16 @@
-from zope.interface import alsoProvides
 from zope.component import queryUtility
 
 from ZPublisher.BaseRequest import DefaultPublishTraverse
 
-from cpskin.minisite.interfaces import IMinisite
-from cpskin.minisite.interfaces import IInMinisite
+from cpskin.minisite.interfaces import IMinisiteConfig
+from cpskin.minisite.minisite import decorateRequest
 
 
 class MinisiteTraverser(DefaultPublishTraverse):
 
     def publishTraverse(self, request, name):
         path = "/".join(self.context.getPhysicalPath() + (name,))
-        minisite = queryUtility(IMinisite, name=path)
-        if minisite:
-            alsoProvides(request, IInMinisite)
-            request.set('cpskin_minisite', minisite)
+        config = queryUtility(IMinisiteConfig, name=path)
+        decorateRequest(request, config)
         return super(MinisiteTraverser, self).publishTraverse(
             request, name)
