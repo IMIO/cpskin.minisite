@@ -17,9 +17,10 @@ class MinisiteConfig(object):
 
 def decorateRequest(request, config):
     minisite = request.get('cpskin_minisite', None)
-    if minisite:
+    if isinstance(minisite, Minisite):
         return
     if config:
+        alsoProvides(request, IInMinisite)
         minisite = Minisite(request, config)
     else:
         minisite = NotInMinisite()
@@ -41,8 +42,6 @@ class Minisite(object):
     is_minisite = True
 
     def __init__(self, request, config):
-        if config:
-            alsoProvides(request, IInMinisite)
         self.main_portal_url = config.main_portal_url
         self.minisite_url = config.minisite_url
         self.search_path = config.search_path
