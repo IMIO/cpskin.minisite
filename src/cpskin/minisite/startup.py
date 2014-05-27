@@ -5,7 +5,6 @@ from zope.component import provideUtility
 
 from cpskin.minisite.minisite import MinisiteConfig
 
-
 def registerMinisites(event):
     CLIENT_HOME = os.environ["CLIENT_HOME"]
     minisites_directory = os.path.join(CLIENT_HOME, 'minisites')
