@@ -16,6 +16,14 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <genericsetup:registerProfile
+        name="uninstall"
+        title="cpskin.minisite"
+        directory="profiles/uninstall"
+        description="Uninstalls the cpskin.minisite package"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
     <browser:viewlet
         name="cpskin.minisite"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
