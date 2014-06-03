@@ -1,6 +1,8 @@
-from setuptools import setup, find_packages
+# -*- coding: utf-8 -*-
 
 version = '0.1'
+
+from setuptools import setup, find_packages
 
 long_description = (
     open('README.rst').read()
@@ -34,9 +36,7 @@ setup(
     author_email='support@imio.be',
     url='https://github.com/imio/',
     license='gpl',
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
-    namespace_packages=['cpskin', ],
+    packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     install_requires=[
@@ -49,6 +49,5 @@ setup(
             'plone.app.robotframework [debug]',
         ],
     },
-    entry_points="""
-    """
+    entry_points={},
 )
