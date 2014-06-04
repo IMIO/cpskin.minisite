@@ -43,7 +43,7 @@
     
     <adapter
         provides="zope.publisher.interfaces.browser.IBrowserPublisher"
-        for="OFS.interfaces.ITraversable
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot
             .interfaces.IThemeSpecific"
         factory=".traverser.MinisiteTraverser"
         />

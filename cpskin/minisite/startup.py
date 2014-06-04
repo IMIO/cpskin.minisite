@@ -4,6 +4,8 @@ import os.path
 from zope.component import provideUtility
 
 from cpskin.minisite.minisite import MinisiteConfig
+from cpskin.minisite import logger
+
 
 def registerMinisites(event):
     CLIENT_HOME = os.environ["CLIENT_HOME"]
@@ -26,6 +28,7 @@ def registerMinisitesFromFile(filename):
         config.read(filename)
     except ConfigParser.MissingSectionHeaderError:
         return
+    logger.debug('Register minisites from file {}'.format(filename))
     for section in config.sections():
         try:
             search_path = config.get(section, 'search_path')
@@ -35,12 +38,21 @@ def registerMinisitesFromFile(filename):
                 minisite_url=minisite_url,
                 search_path=search_path,
             )
-            provideUtility(
-                minisite,
-                name=search_path,
-            )
+            registerMinisite(minisite)
         except KeyError:
             continue
+
+
+def registerMinisite(config):
+    logger.debug('Register minisite at {} for {}'.format(
+        config.main_portal_url,
+        config.minisite_url,
+        )
+    )
+    provideUtility(
+        config,
+        name=config.search_path,
+    )
 
 
 def registerMinisitesSetupHandler(context):
