@@ -28,9 +28,18 @@
         name="cpskin.minisite"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
         class=".viewlet.MinisiteViewlet"
-        template="viewlet.pt"
+        template="minisite_in_minisite.pt"
         permission="zope2.View"
         layer=".interfaces.IInMinisite"
+        />
+    
+    <browser:viewlet
+        name="cpskin.minisite"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        class=".viewlet.MinisiteViewlet"
+        template="minisite_in_portal.pt"
+        permission="zope2.View"
+        layer=".interfaces.IInPortal"
         />
     
     <browser:viewlet
@@ -40,6 +49,16 @@
         permission="zope2.View"
         layer=".interfaces.IInMinisite"
         />
+    
+    <browser:page
+        name="search"
+        class="plone.app.search.browser.Search"
+        permission="zope2.View"
+        for="*"
+        template="search_in_minisite.pt"
+        layer=".interfaces.IInMinisite"
+        />
+
     
     <adapter
         provides="zope.publisher.interfaces.browser.IBrowserPublisher"

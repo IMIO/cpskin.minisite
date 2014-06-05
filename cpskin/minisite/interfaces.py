@@ -7,8 +7,22 @@ class IThemeSpecific(IDefaultPloneLayer):
     """
 
 
-class IInMinisite(IThemeSpecific):
+class IInMinisiteBase(IThemeSpecific):
     """Marker interface set on request after traversal in a minisite.
+    """
+
+
+class IInPortal(IInMinisiteBase):
+    """Marker interface set on request after traversal in a minisite.
+
+    Request comes with the portal domain.
+    """
+
+
+class IInMinisite(IInMinisiteBase):
+    """Marker interface set on request after traversal in a minisite.
+
+    Request comes with the minisite domain.
     """
 
 

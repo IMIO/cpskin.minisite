@@ -5,9 +5,8 @@ from plone.app.layout.viewlets.common import SearchBoxViewlet as SearchBoxBase
 
 
 class MinisiteViewlet(ViewletBase):
-
     pass
 
 
 class SearchBoxViewlet(SearchBoxBase):
-    index = ViewPageTemplateFile('searchbox.pt')
+    index = ViewPageTemplateFile('searchbox_in_minisite.pt')

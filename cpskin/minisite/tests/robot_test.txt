@@ -17,9 +17,7 @@ Plone site does not show minisite viewlet
     Go to  ${PLONE_URL}
     Page should contain  Plone site
     Page should not contain  This is a minisite in portal mode.
-    Page should contain element  css=#searchbox_currentfolder_only
-    Element should be visible  css=#searchbox_currentfolder_only
-    Checkbox should not be selected  css=#searchbox_currentfolder_only
+    Page should contain element  css=div.searchSection
 
 Minisite does show minisite viewlet in portal mode
     Enable autologin as  Manager
@@ -27,7 +25,7 @@ Minisite does show minisite viewlet in portal mode
     Go to  ${PLONE_URL}/minisite
     Page should contain  Mini site
     Page should contain  This is a minisite in portal mode.
-    Page should not contain element  css=#searchbox_currentfolder_only
+    Page should contain element  css=div.searchSection
 
 Minisite does show minisite viewlet in minisite mode
     Enable autologin as  Manager
@@ -35,9 +33,7 @@ Minisite does show minisite viewlet in minisite mode
     Go to  http://127.0.0.1:${ZOPE_PORT}/${PLONE_SITE_ID}/minisite
     Page should contain  Mini site
     Page should contain  This is a minisite in minisite mode.
-    Page should contain element  css=#searchbox_currentfolder_only
-    Element should not be visible  css=#searchbox_currentfolder_only
-    Checkbox should be selected  css=#searchbox_currentfolder_only
+    Page should not contain element  css=div.searchSection
 
 Subfolder of minisite does show minisite viewlet
     Enable autologin as  Manager
@@ -46,7 +42,6 @@ Subfolder of minisite does show minisite viewlet
     Go to  ${PLONE_URL}/minisite/subfolder
     Page should contain  Subfolder
     Page should contain  This is a minisite in portal mode.
-    Page should not contain element  css=#searchbox_currentfolder_only
     #Import library  DebugLibrary
     #Debug
 
@@ -59,7 +54,6 @@ Minisite as subfolder does show minisite viewlet
     #Debug
     Page should contain  Mini site
     Page should contain  This is a minisite in portal mode.
-    Page should not contain element  css=#searchbox_currentfolder_only
 
 *** Keywords ***
 

@@ -3,6 +3,7 @@ from zope.interface import alsoProvides
 
 from cpskin.minisite.interfaces import IMinisiteConfig
 from cpskin.minisite.interfaces import IInMinisite
+from cpskin.minisite.interfaces import IInPortal
 from cpskin.minisite import logger
 
 
@@ -21,9 +22,12 @@ def decorateRequest(request, config):
     if isinstance(minisite, Minisite):
         return
     if config:
-        alsoProvides(request, IInMinisite)
-        logger.debug('Request at {} is marked as minisite'.format(request.URL))
         minisite = Minisite(request, config)
+        if minisite.is_in_minisite_mode:
+            alsoProvides(request, IInMinisite)
+        else:
+            alsoProvides(request, IInPortal)
+        logger.debug('Request at {} is marked as minisite'.format(request.URL))
     else:
         minisite = NotInMinisite()
     request.set('cpskin_minisite', minisite)
