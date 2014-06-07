@@ -31,14 +31,17 @@
                value="Search"
                i18n:attributes="value label_search;" />
 
-        <input id="searchbox_currentfolder_only"
-               class="noborder"
-               type="hidden"
-               name="path"
-               tal:attributes="value request/cpskin_minisite/search_path"
-               />
+        <div class="searchSection" style="display: none;">
+            <input id="searchbox_currentfolder_only"
+                   class="noborder"
+                   type="checkbox"
+                   name="path"
+                   checked="checked"
+                   tal:attributes="value request/cpskin_minisite/search_path"
+                   />
+        </div>
 
-        <div class="LSResult" id="LSResult"><div class="LSShadow" id="LSShadow"></div></div>
+        <div class="LSResult" id="LSResult" style="margin-top:0;"><div class="LSShadow" id="LSShadow"></div></div>
         </div>
     </form>
 
