@@ -59,7 +59,6 @@
         layer=".interfaces.IInMinisite"
         />
 
-    
     <adapter
         provides="zope.publisher.interfaces.browser.IBrowserPublisher"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot
