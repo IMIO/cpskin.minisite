@@ -10,12 +10,16 @@
 
   <div id="content-core" metal:fill-slot="main">
 
-  <h2>Minisites</h2>
+  <h2 i18n:translate="">Minisites</h2>
 
-  <p>This is a read-only presentation showing which minisites are configured.</p>
-
-  <tal:configs repeat="minisite view/minisites">
-  <h3><a 
+  <tal:block define="minisites view/minisites">
+  <tal:no_minisites condition="not:minisites">
+  <p i18n:translate="">There are no mini sites configured.</p>
+  </tal:no_minisites>
+  <tal:sites repeat="minisite view/minisites">
+  <p class="discreet" i18n:translate="">Read-only list of minisites.</p>
+  <h3><a
+      i18n:translate=""
       tal:define="obj python:minisite.obj(context)"
       tal:attributes="href obj/absolute_url"
       tal:content="obj/Title"
@@ -25,7 +29,8 @@
     Domain <span tal:replace="minisite/minisite_url" /><br />
     <span class="discreet">in file <span tal:replace="minisite/filename"
         /></span></p>
-  </tal:configs>
+  </tal:sites>
+  </tal:block>
 
   </div>
 

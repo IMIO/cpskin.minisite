@@ -7,8 +7,10 @@ from cpskin.minisite.interfaces import IMinisiteConfig
 class MinisitesPanel(BrowserView):
 
     def minisites(self):
-        portal_url = self.context.absolute_url()
+        portal_path = '/'.join(self.context.getPhysicalPath())
         configs = getUtilitiesFor(IMinisiteConfig, self.context)
-        for name, config in configs:
-            if portal_url.startswith(config.main_portal_url):
-                yield config
+        result = [
+            config for name, config in configs
+            if config.search_path.startswith(portal_path)
+        ]
+        return result
