@@ -18,7 +18,8 @@
   <h3><a 
       tal:define="obj python:minisite.obj(context)"
       tal:attributes="href obj/absolute_url"
-      tal:content="obj/Title" /></h3>
+      tal:content="obj/Title"
+      tal:on-error="string:Minisite does not exist." /></h3>
     <p>
     Path <span tal:replace="minisite/search_path" /><br />
     Domain <span tal:replace="minisite/minisite_url" /><br />

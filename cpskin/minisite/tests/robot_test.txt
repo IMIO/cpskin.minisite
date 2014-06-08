@@ -20,6 +20,26 @@ Plone site does not show minisite viewlet
     Page should contain element  css=div.searchSection
     Element should be visible  css=div.searchSection
 
+Plone control panel does show panel link
+    Enable autologin as  Manager
+    Go to  ${PLONE_URL}/plone_control_panel
+    #Import library  DebugLibrary
+    #Debug
+    Page should contain  Mini sites
+    Page should contain link  @@minisites_panel
+
+Control panel does show panel minisites
+    Enable autologin as  Manager
+    ${folder}=  Create content  id=folder  type=Folder  title=Folder
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
+    Go to  ${PLONE_URL}/plone_control_panel
+    Page should contain link  @@minisites_panel
+    Click link  @@minisites_panel
+    Page should contain  tests/minisites_config.txt
+    Page should contain  Path /plone/folder/minisite
+    Page should contain  Minisite does not exist
+
+
 Minisite does show minisite viewlet in portal mode
     Enable autologin as  Manager
     Create content  id=minisite  type=Folder  title=Mini site
