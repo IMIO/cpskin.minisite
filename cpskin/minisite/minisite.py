@@ -1,3 +1,5 @@
+import Zope2
+
 from zope.interface import implements
 from zope.interface import alsoProvides
 
@@ -11,10 +13,16 @@ class MinisiteConfig(object):
 
     implements(IMinisiteConfig)
 
-    def __init__(self, main_portal_url, minisite_url, search_path):
+    def __init__(self, main_portal_url, minisite_url, search_path, filename):
         self.main_portal_url = main_portal_url
         self.minisite_url = minisite_url
         self.search_path = search_path
+        self.filename = filename
+    
+    def obj(self, context):
+        obj = Zope2.app().unrestrictedTraverse(self.search_path)
+        wrapped = obj.__of__(context)
+        return wrapped
 
 
 def decorateRequest(request, config):

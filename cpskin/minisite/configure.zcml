@@ -59,6 +59,14 @@
         layer=".interfaces.IInMinisite"
         />
 
+    <browser:page
+        name="minisites_panel"
+        class=".controlpanel.MinisitesPanel"
+        permission="zope2.View"
+        for="*"
+        template="minisites_panel.pt"
+        />
+
     <adapter
         provides="zope.publisher.interfaces.browser.IBrowserPublisher"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot

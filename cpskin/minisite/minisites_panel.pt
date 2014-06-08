@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+  <div id="content-core" metal:fill-slot="main">
+
+  <h2>Minisites</h2>
+
+  <p>This is a read-only presentation showing which minisites are configured.</p>
+
+  <tal:configs repeat="minisite view/minisites">
+  <h3><a 
+      tal:define="obj python:minisite.obj(context)"
+      tal:attributes="href obj/absolute_url"
+      tal:content="obj/Title" /></h3>
+    <p>
+    Path <span tal:replace="minisite/search_path" /><br />
+    Domain <span tal:replace="minisite/minisite_url" /><br />
+    <span class="discreet">in file <span tal:replace="minisite/filename"
+        /></span></p>
+  </tal:configs>
+
+  </div>
+
+</body>
+</html>

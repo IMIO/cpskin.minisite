@@ -37,6 +37,7 @@ def registerMinisitesFromFile(filename):
                 main_portal_url=section,
                 minisite_url=minisite_url,
                 search_path=search_path,
+                filename=filename,
             )
             registerMinisite(minisite)
         except KeyError:
