@@ -24,11 +24,13 @@
       tal:attributes="href obj/absolute_url"
       tal:content="obj/Title"
       tal:on-error="string:Minisite does not exist." /></h3>
-    <p>
-    Path <span tal:replace="minisite/search_path" /><br />
-    Domain <span tal:replace="minisite/minisite_url" /><br />
-    <span class="discreet">in file <span tal:replace="minisite/filename"
-        /></span></p>
+    <p i18n:translate="">
+    Path <span i18n:name="search_path"
+               tal:replace="minisite/search_path" /><br />
+    Domain <span i18n:name="domain"
+                 tal:replace="minisite/minisite_url" /><br />
+    <span class="discreet">in file <span i18n:name="filename"
+                                         tal:replace="minisite/filename" /></span></p>
   </tal:sites>
   </tal:block>
 
