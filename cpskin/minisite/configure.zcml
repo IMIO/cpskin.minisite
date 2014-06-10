@@ -34,15 +34,6 @@
         />
     
     <browser:viewlet
-        name="cpskin.minisite"
-        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-        class=".viewlet.MinisiteViewlet"
-        template="minisite_in_portal.pt"
-        permission="zope2.View"
-        layer=".interfaces.IInPortal"
-        />
-    
-    <browser:viewlet
         name="plone.searchbox"
         manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
         class=".viewlet.SearchBoxViewlet"
