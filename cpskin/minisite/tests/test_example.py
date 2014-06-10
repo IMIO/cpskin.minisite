@@ -2,8 +2,7 @@ import unittest2 as unittest
 
 from Products.CMFCore.utils import getToolByName
 
-from cpskin.minisite.testing import \
-    CPSKIN_MINISITE_INTEGRATION_TESTING
+from cpskin.minisite.testing import CPSKIN_MINISITE_INTEGRATION_TESTING
 
 
 class TestExample(unittest.TestCase):
