@@ -91,6 +91,8 @@ Search with searchbox in minisite as subfolder does show all content
     Page should contain  Mini site
     Page should not contain  Display in
     Input text  css=#searchGadget  To find
+    Wait Until Page contains  To find in minisite
+    Wait Until Page contains  To find in folder
     Page should contain  To find in minisite
     Page should contain  To find in folder
     Click element  css=#portal-searchbox .searchButton
