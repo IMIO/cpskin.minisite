@@ -48,15 +48,16 @@ Typically, the files must be saved in ``buildout_dir/var/instance/minisites``.
 The configuration file is a INI-file format file. Each section is confgured as
 below::
 
-    [http://localhost]
+    [/plone/folder/minisite]
     minisite_url = http://minisite/url
-    search_path = /plone/minisite
+    portal_url = http://localhost
 
  
-Where the section name is the portal url.
-The minisite is identified by its ``search_path``, path from the Zope root.
-The ``minisite_url`` holds the url and specific domain under which the minisite
+Where the section name is the minisite path from the Zope root.
+The ``minisite_url`` holds the url with the specific domain under which the minisite
 must be served.
+The ``portal_url`` holds the url with the specific domain under which the
+portal is served.
 
 Tests
 =====

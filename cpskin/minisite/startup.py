@@ -31,12 +31,12 @@ def registerMinisitesFromFile(filename):
     logger.debug('Register minisites from file {}'.format(filename))
     for section in config.sections():
         try:
-            search_path = config.get(section, 'search_path')
+            portal_url = config.get(section, 'portal_url')
             minisite_url = config.get(section, 'minisite_url')
             minisite = MinisiteConfig(
-                main_portal_url=section,
+                main_portal_url=portal_url,
                 minisite_url=minisite_url,
-                search_path=search_path,
+                search_path=section,
                 filename=filename,
             )
             registerMinisite(minisite)

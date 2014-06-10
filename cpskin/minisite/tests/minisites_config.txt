@@ -1,7 +1,7 @@
-[http://localhost]
+[/plone/minisite]
 minisite_url = http://127.0.0.1
-search_path = /plone/minisite
+portal_url = http://localhost
 
-[http://localhos]
+[/plone/folder/minisite]
 minisite_url = http://127.0.0.1
-search_path = /plone/folder/minisite
+portal_url = http://localhost
