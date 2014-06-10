@@ -1,10 +1,62 @@
 .. contents::
 
-Introduction
-============
+UI for sections of site configured with their own domain.
 
-UI for sections configured with their own domain
+Overview
+========
+Those sections are named mini sites.
 
+When a mini site is traversed, the request is marked with 
+
+``IInMinisite`` if the domain used is the mini site domain,
+
+or 
+
+``IInPortal`` if the domain used is the portal domain.
+
+The request is also decorated with a ``cpskin_minisite`` attribute
+which holds an instance of ``cpskin.minisite.minisite.Minisite`` class.
+
+The instance has the following attributes :
+
+``main_portal_url``
+  The url under which the portal is served.
+
+``minisite_url``
+  The url under which the section is served as a minisite.
+
+``search_path``
+  The location of the section, expressed as a path from the Zope root.
+
+``is_in_minisite_mode``
+  Is the current request served as minisite ?
+
+``is_in_portal_mode``
+  Is the current request served as portal ?
+
+
+Configuration
+=============
+
+The mini sites are configured by placing files in directory named ``minisites`` inside the ``CLIENT_HOME`` directory. 
+
+The ``CLIENT_HOME`` directory is found inside the ``var`` directory in a
+standard instance built with buildout recipe ``plone.recipe.zope2instance``.
+
+Typically, the files must be saved in ``buildout_dir/var/instance/minisites``.
+
+The configuration file is a INI-file format file. Each section is confgured as
+below::
+
+    [http://localhost]
+    minisite_url = http://minisite/url
+    search_path = /plone/minisite
+
+ 
+Where the section name is the portal url.
+The minisite is identified by its ``search_path``, path from the Zope root.
+The ``minisite_url`` holds the url and specific domain under which the minisite
+must be served.
 
 Tests
 =====
