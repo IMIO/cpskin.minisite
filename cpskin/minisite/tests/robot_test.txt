@@ -23,15 +23,13 @@ Plone site does not show minisite viewlet
 Plone control panel does show panel link
     Enable autologin as  Manager
     Go to  ${PLONE_URL}/plone_control_panel
-    #Import library  DebugLibrary
-    #Debug
     Page should contain  Mini sites
     Page should contain link  @@minisites_panel
 
 Control panel does show panel minisites
     Enable autologin as  Manager
     ${folder}=  Create content  id=folder  type=Folder  title=Folder
-    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description  container=${folder}
     Go to  ${PLONE_URL}/plone_control_panel
     Page should contain link  @@minisites_panel
     Click link  @@minisites_panel
@@ -41,7 +39,7 @@ Control panel does show panel minisites
 
 Minisite does not show minisite viewlet in portal mode
     Enable autologin as  Manager
-    Create content  id=minisite  type=Folder  title=Mini site
+    Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
     Go to  ${PLONE_URL}/minisite
     Page should contain  Mini site
     Page should not contain minisite viewlet
@@ -50,16 +48,28 @@ Minisite does not show minisite viewlet in portal mode
 
 Minisite does show minisite viewlet in minisite mode
     Enable autologin as  Manager
-    Create content  id=minisite  type=Folder  title=Mini site
+    Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
     Go to  ${SUBDOMAIN_PLONE_URL}/minisite
     Page should contain  Mini site
     Page should contain minisite viewlet
     Page should contain element  css=div.searchSection
     Element should not be visible  css=div.searchSection
 
+Minisite viewlet link in minisite mode leads to same page in portal mode
+    Enable autologin as  Manager
+    Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
+    Go to  ${SUBDOMAIN_PLONE_URL}/minisite
+#    Import library  DebugLibrary
+#    Debug
+    Page should contain  Mini site
+    Page should contain minisite viewlet
+    Click link  localhost
+    Page should contain  Mini site description
+    Page should not contain minisite viewlet
+
 Subfolder of minisite does not show minisite viewlet in portal mode
     Enable autologin as  Manager
-    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
     Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
     Go to  ${PLONE_URL}/minisite/subfolder
     Page should contain  Subfolder
@@ -67,16 +77,27 @@ Subfolder of minisite does not show minisite viewlet in portal mode
 
 Subfolder of minisite does show minisite viewlet in minisite mode
     Enable autologin as  Manager
-    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
     Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
     Go to  ${SUBDOMAIN_PLONE_URL}/minisite/subfolder
     Page should contain  Subfolder
     Page should contain minisite viewlet
 
+Minisite viewlet link of subfolder in minisite mode leads to same page in portal mode
+    Enable autologin as  Manager
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
+    Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
+    Go to  ${SUBDOMAIN_PLONE_URL}/minisite/subfolder
+    Page should contain  Subfolder
+    Page should contain minisite viewlet
+    Click link  localhost
+    Page should contain  Subfolder
+    Page should not contain minisite viewlet
+
 Minisite as subfolder does not show minisite viewlet in portal mode
     Enable autologin as  Manager
     ${folder}=  Create content  id=folder  type=Folder  title=Folder
-    Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
+    Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description  container=${folder}
     Go to  ${PLONE_URL}/folder/minisite
     Page should contain  Mini site
     Page should not contain minisite viewlet
@@ -84,7 +105,7 @@ Minisite as subfolder does not show minisite viewlet in portal mode
 Minisite as subfolder does show minisite viewlet in minisite mode
     Enable autologin as  Manager
     ${folder}=  Create content  id=folder  type=Folder  title=Folder
-    Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
+    Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description  container=${folder}
     Go to  ${SUBDOMAIN_PLONE_URL}/folder/minisite
     Page should contain  Mini site
     Page should contain minisite viewlet
@@ -93,7 +114,7 @@ Search with searchbox in minisite as subfolder does show all content
     Enable autologin as  Manager
     ${folder}=  Create content  id=folder  type=Folder  title=Folder
     Create content  id=to_find  type=Folder  title=To find in folder  container=${folder}
-    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description  container=${folder}
     Create content  id=to_find  type=Folder  title=To find in minisite  container=${minisite}
     Go to  ${PLONE_URL}/folder/minisite
     Page should contain  Mini site
@@ -114,7 +135,7 @@ Minisite mode Search with searchbox in minisite as subfolder does show all conte
     Enable autologin as  Manager
     ${folder}=  Create content  id=folder  type=Folder  title=Folder
     Create content  id=to_find  type=Folder  title=To find in folder  container=${folder}
-    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description  container=${folder}
     Create content  id=to_find  type=Folder  title=To find in minisite  container=${minisite}
     Go to  ${SUBDOMAIN_PLONE_URL}/folder/minisite
     Page should contain  Mini site

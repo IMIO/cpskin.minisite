@@ -2,6 +2,6 @@
      i18n:translate="">
    Display in 
    <a i18n:name="portal_url"
-      tal:attributes="href request/cpskin_minisite/main_portal_url"
+      tal:attributes="href view/url_in_portal_mode"
       tal:content="request/cpskin_minisite/main_portal_name" />.
 </div>
