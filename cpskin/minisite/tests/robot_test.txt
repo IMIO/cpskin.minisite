@@ -83,6 +83,22 @@ Subfolder of minisite does show minisite viewlet in minisite mode
     Page should contain  Subfolder
     Page should contain minisite viewlet
 
+Content of minisite does not show minisite viewlet in portal mode
+    Enable autologin as  Manager
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
+    Create content  id=content  type=Document  title=Document  container=${minisite}
+    Go to  ${PLONE_URL}/minisite/content
+    Page should contain  Document
+    Page should not contain minisite viewlet
+
+Content of minisite does show minisite viewlet in minisite mode
+    Enable autologin as  Manager
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
+    Create content  id=content  type=Document  title=Document  container=${minisite}
+    Go to  ${SUBDOMAIN_PLONE_URL}/minisite/content
+    Page should contain  Document
+    Page should contain minisite viewlet
+
 Minisite viewlet link of subfolder in minisite mode leads to same page in portal mode
     Enable autologin as  Manager
     ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
