@@ -18,7 +18,7 @@ class MinisiteConfig(object):
         self.minisite_url = minisite_url
         self.search_path = search_path
         self.filename = filename
-    
+
     def obj(self, context):
         obj = Zope2.app().unrestrictedTraverse(self.search_path)
         wrapped = obj.__of__(context)
@@ -49,6 +49,7 @@ class NotInMinisite(object):
     main_portal_url = ''
     minisite_url = ''
     search_path = ''
+    main_portal_name = ''
 
 
 class Minisite(object):
@@ -61,3 +62,13 @@ class Minisite(object):
         self.search_path = config.search_path
         self.is_in_minisite_mode = request.URL.startswith(self.minisite_url)
         self.is_in_portal_mode = request.URL.startswith(self.main_portal_url)
+        self.main_portal_name = self._main_portal_name()
+
+    def _main_portal_name(self):
+        portal_url = self.main_portal_url
+        if portal_url.startswith('https://'):
+            return portal_url[8:]
+        elif portal_url.startswith('http://'):
+            return portal_url[7:]
+        else:
+            return portal_url

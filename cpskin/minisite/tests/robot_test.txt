@@ -16,7 +16,7 @@ ${SUBDOMAIN_PLONE_URL} =   http://127.0.0.1:${ZOPE_PORT}/${PLONE_SITE_ID}
 Plone site does not show minisite viewlet
     Go to  ${PLONE_URL}
     Page should contain  Plone site
-    Page should not contain  Display in
+    Page should not contain minisite viewlet
     Page should contain element  css=div.searchSection
     Element should be visible  css=div.searchSection
 
@@ -44,7 +44,7 @@ Minisite does not show minisite viewlet in portal mode
     Create content  id=minisite  type=Folder  title=Mini site
     Go to  ${PLONE_URL}/minisite
     Page should contain  Mini site
-    Page should not contain  Display in
+    Page should not contain minisite viewlet
     Page should contain element  css=div.searchSection
     Element should be visible  css=div.searchSection
 
@@ -53,17 +53,25 @@ Minisite does show minisite viewlet in minisite mode
     Create content  id=minisite  type=Folder  title=Mini site
     Go to  ${SUBDOMAIN_PLONE_URL}/minisite
     Page should contain  Mini site
-    Page should contain  Display in
+    Page should contain minisite viewlet
     Page should contain element  css=div.searchSection
     Element should not be visible  css=div.searchSection
 
-Subfolder of minisite does show minisite viewlet
+Subfolder of minisite does not show minisite viewlet in portal mode
     Enable autologin as  Manager
     ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site
     Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
     Go to  ${PLONE_URL}/minisite/subfolder
     Page should contain  Subfolder
-    Page should not contain  Display in
+    Page should not contain minisite viewlet
+
+Subfolder of minisite does show minisite viewlet in minisite mode
+    Enable autologin as  Manager
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site
+    Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
+    Go to  ${SUBDOMAIN_PLONE_URL}/minisite/subfolder
+    Page should contain  Subfolder
+    Page should contain minisite viewlet
 
 Minisite as subfolder does not show minisite viewlet in portal mode
     Enable autologin as  Manager
@@ -71,7 +79,7 @@ Minisite as subfolder does not show minisite viewlet in portal mode
     Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
     Go to  ${PLONE_URL}/folder/minisite
     Page should contain  Mini site
-    Page should not contain  Display in
+    Page should not contain minisite viewlet
 
 Minisite as subfolder does show minisite viewlet in minisite mode
     Enable autologin as  Manager
@@ -79,7 +87,7 @@ Minisite as subfolder does show minisite viewlet in minisite mode
     Create content  id=minisite  type=Folder  title=Mini site  container=${folder}
     Go to  ${SUBDOMAIN_PLONE_URL}/folder/minisite
     Page should contain  Mini site
-    Page should contain  Display in
+    Page should contain minisite viewlet
 
 Search with searchbox in minisite as subfolder does show all content
     Enable autologin as  Manager
@@ -89,7 +97,7 @@ Search with searchbox in minisite as subfolder does show all content
     Create content  id=to_find  type=Folder  title=To find in minisite  container=${minisite}
     Go to  ${PLONE_URL}/folder/minisite
     Page should contain  Mini site
-    Page should not contain  Display in
+    Page should not contain minisite viewlet
     Input text  css=#searchGadget  To find
     Wait Until Page contains  To find in minisite
     Wait Until Page contains  To find in folder
@@ -110,7 +118,7 @@ Minisite mode Search with searchbox in minisite as subfolder does show all conte
     Create content  id=to_find  type=Folder  title=To find in minisite  container=${minisite}
     Go to  ${SUBDOMAIN_PLONE_URL}/folder/minisite
     Page should contain  Mini site
-    Page should contain  Display in
+    Page should contain minisite viewlet
     Input text  css=#searchGadget  To find
     Page should contain  To find in minisite
     Page should not contain  To find in folder
@@ -127,3 +135,11 @@ Minisite mode Search with searchbox in minisite as subfolder does show all conte
 
 Start browser
     Open browser  http://localhost:55001/plone/  browser=${BROWSER}
+
+Page should contain minisite viewlet
+    Page should contain  Display in
+    Page should contain link  localhost
+
+Page should not contain minisite viewlet
+    Page should not contain  Display in
+

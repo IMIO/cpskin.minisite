@@ -3,5 +3,5 @@
    Display in 
    <a i18n:name="portal_url"
       tal:attributes="href request/cpskin_minisite/main_portal_url"
-      tal:content="request/cpskin_minisite/main_portal_url" />.
+      tal:content="request/cpskin_minisite/main_portal_name" />.
 </div>
