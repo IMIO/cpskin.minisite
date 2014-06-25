@@ -17,7 +17,7 @@ class MinisiteTraverser(DefaultPublishTraverse):
             request, name)
         if IContentish.providedBy(result):
             path = "/".join(result.getPhysicalPath())
-            logger.info('Traversing {}'.format(path))
+            logger.debug('Traversing {}'.format(path))
             config = queryUtility(IMinisiteConfig, name=path)
             decorateRequest(request, config)
         return result
@@ -30,7 +30,7 @@ class MinisiteImageTraverser(ImageTraverser):
             request, name)
         if IContentish.providedBy(result):
             path = "/".join(result.getPhysicalPath())
-            logger.info('Traversing {}'.format(path))
+            logger.debug('Traversing {}'.format(path))
             config = queryUtility(IMinisiteConfig, name=path)
             decorateRequest(request, config)
         return result
