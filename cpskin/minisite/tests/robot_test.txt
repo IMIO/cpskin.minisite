@@ -64,6 +64,7 @@ Minisite viewlet link in minisite mode leads to same page in portal mode
     Page should contain  Mini site
     Page should contain minisite viewlet
     Click link  localhost
+    Select Window  url=${PLONE_URL}/minisite
     Page should contain  Mini site description
     Page should not contain minisite viewlet
 
@@ -107,6 +108,7 @@ Minisite viewlet link of subfolder in minisite mode leads to same page in portal
     Page should contain  Subfolder
     Page should contain minisite viewlet
     Click link  localhost
+    Select Window  url=${PLONE_URL}/minisite/subfolder
     Page should contain  Subfolder
     Page should not contain minisite viewlet
 
