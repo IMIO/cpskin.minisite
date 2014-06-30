@@ -17,6 +17,7 @@ eggs/
 fake-eggs/
 parts/
 dist/
+src/
 var/
 log.html
 output.xml
