@@ -7,6 +7,7 @@ from plone.app.layout.viewlets.common import SearchBoxViewlet as SearchBoxBase
 
 
 class MinisiteViewlet(ViewletBase):
+    index = ViewPageTemplateFile('minisite_in_minisite.pt')
 
     def url_in_portal_mode(self):
         portal_url = getToolByName(self.context, 'portal_url')
