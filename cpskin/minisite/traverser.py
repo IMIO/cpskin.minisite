@@ -7,6 +7,7 @@ from Products.CMFCore.interfaces import IContentish
 
 from cpskin.minisite.interfaces import IMinisiteConfig
 from cpskin.minisite.minisite import decorateRequest
+from cpskin.minisite.portlet import checkPortlet
 from cpskin.minisite import logger
 
 
@@ -20,6 +21,7 @@ class MinisiteTraverser(DefaultPublishTraverse):
             logger.debug('Traversing {}'.format(path))
             config = queryUtility(IMinisiteConfig, name=path)
             decorateRequest(request, config)
+            checkPortlet(request, config)
         return result
 
 
@@ -33,4 +35,5 @@ class MinisiteImageTraverser(ImageTraverser):
             logger.debug('Traversing {}'.format(path))
             config = queryUtility(IMinisiteConfig, name=path)
             decorateRequest(request, config)
+            checkPortlet(request, config)
         return result

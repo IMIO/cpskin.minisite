@@ -42,6 +42,8 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
+        'plone.api',
+        'collective.weightedportlets',
     ],
     extras_require={
         'test': [
