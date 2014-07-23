@@ -70,8 +70,8 @@ def checkPortlet(request, config):
                                       IPortletAssignmentMapping)
         if not 'minisite' in assignments:
             assignment = Assignment(name=u"Mini site",
-                                    weight=0)
+                                    weight=100)
             if not hasattr(assignment, 'collective.weightedportlets'):
                 setattr(assignment, 'collective.weightedportlets', PersistentDict())
-            getattr(assignment, 'collective.weightedportlets')['weight'] = 0
+            getattr(assignment, 'collective.weightedportlets')['weight'] = 100
             assignments['minisite'] = assignment
