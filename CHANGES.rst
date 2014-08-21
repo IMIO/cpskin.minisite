@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2 (unreleased)
+0.2 (2014-08-21)
 ----------------
 
 - Add minisite portlet on top of right column (affinitic #5859)
