@@ -62,6 +62,8 @@ def checkPortlet(request, config):
 
     if minisite.is_in_minisite_mode:
         portal = api.portal.get()
+        # Il se base sur le search_path pour creer un element dans le portlet.
+        # comme les 2 search_path sont les meme
         minisiteRoot = portal.unrestrictedTraverse(minisite.search_path)
         manager = getUtility(IPortletManager,
                              name=u'plone.rightcolumn',
