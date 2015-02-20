@@ -29,19 +29,13 @@ def registerMinisitesFromFile(filename):
     except ConfigParser.MissingSectionHeaderError:
         return
     logger.debug('Register minisites from file {}'.format(filename))
-    # import ipdb;ipdb.set_trace()
     for section in config.sections():
         try:
             portal_url = config.get(section, 'portal_url')
-            # XXX check if path is unique
-            try:
-                minisite_urls = config.get(section, 'minisite_urls')
-            except:
-                minisite_urls = config.get(section, 'minisite_url')
-            minisite_url_list = [minisite_url.strip() for minisite_url in minisite_urls.split(',')]
+            minisite_url = config.get(section, 'minisite_url')
             minisite = MinisiteConfig(
                 main_portal_url=portal_url,
-                minisite_urls=minisite_url_list,
+                minisite_url=minisite_url,
                 search_path=section,
                 filename=filename,
             )
@@ -53,7 +47,7 @@ def registerMinisitesFromFile(filename):
 def registerMinisite(config):
     logger.debug('Register minisite at {} for {}'.format(
         config.main_portal_url,
-        ", ".join(config.minisite_urls),
+        config.minisite_url,
         )
     )
     provideUtility(

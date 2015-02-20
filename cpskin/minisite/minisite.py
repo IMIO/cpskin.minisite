@@ -13,9 +13,9 @@ class MinisiteConfig(object):
 
     implements(IMinisiteConfig)
 
-    def __init__(self, main_portal_url, minisite_urls, search_path, filename):
+    def __init__(self, main_portal_url, minisite_url, search_path, filename):
         self.main_portal_url = main_portal_url
-        self.minisite_urls = minisite_urls
+        self.minisite_url = minisite_url
         self.search_path = search_path
         self.filename = filename
 
@@ -47,7 +47,7 @@ class NotInMinisite(object):
     is_in_minisite_mode = False
     is_in_portal_mode = False
     main_portal_url = ''
-    minisite_urls = []
+    minisite_url = ''
     search_path = ''
     main_portal_name = ''
 
@@ -58,12 +58,9 @@ class Minisite(object):
 
     def __init__(self, request, config):
         self.main_portal_url = config.main_portal_url
-        self.minisite_urls = config.minisite_urls
+        self.minisite_url = config.minisite_url
         self.search_path = config.search_path
-        self.is_in_minisite_mode = False
-        for minisite_url in self.minisite_urls:
-            if request.URL.startswith(minisite_url):
-                self.is_in_minisite_mode = True
+        self.is_in_minisite_mode = request.URL.startswith(self.minisite_url)
         self.is_in_portal_mode = request.URL.startswith(self.main_portal_url)
         self.main_portal_name = self._main_portal_name()
 

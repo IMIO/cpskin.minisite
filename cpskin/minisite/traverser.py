@@ -10,6 +10,7 @@ from cpskin.minisite.minisite import decorateRequest
 from cpskin.minisite.portlet import checkPortlet
 from cpskin.minisite import logger
 
+
 class MinisiteTraverser(DefaultPublishTraverse):
 
     def publishTraverse(self, request, name):
