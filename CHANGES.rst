@@ -4,7 +4,7 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add minisite_urls attribute.
 
 
 0.2 (2014-08-21)

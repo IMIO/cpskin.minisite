@@ -25,6 +25,9 @@ The instance has the following attributes :
 ``minisite_url``
   The url under which the section is served as a minisite.
 
+``minisite_urls``
+  The urls under which the section is served as a minisite. Use minisite_url OR minisite_urls (urls are separeted with coma) 
+
 ``search_path``
   The location of the section, expressed as a path from the Zope root.
 
