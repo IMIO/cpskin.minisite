@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <object>
-  <hidden manager="plone.portalheader " skinname="*">
+  <order manager="plone.portalheader " skinname="*">
     <viewlet name="cpskin.minisite.menu" />
-  </hidden>
+  </order>
   <order manager="plone.abovecontent" skinname="*">
     <viewlet name="cpskin.minisite" />
   </order>
