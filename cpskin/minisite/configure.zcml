@@ -37,7 +37,7 @@
         />
 
    <browser:viewlet
-        name="cpskin.minisite"
+        name="cpskin.minisitemenu"
         manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
         class=".viewlet.MinisiteViewletMenu"
         permission="zope2.View"

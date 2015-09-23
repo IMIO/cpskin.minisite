@@ -2,7 +2,7 @@
 <object>
 
     <hidden manager="plone.portalheader " skinname="*">
-      <viewlet name="cpskin.minisite.menu" remove="True" />
+      <viewlet name="cpskin.minisitemenu" remove="True" />
     </hidden>
     <hidden manager="plone.abovecontent" skinname="*">
       <viewlet name="cpskin.minisite" remove="True" />
