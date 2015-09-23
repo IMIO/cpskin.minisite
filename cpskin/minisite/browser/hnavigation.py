@@ -12,7 +12,7 @@ from cpskin.minisite.minisite import Minisite
 
 class MSHorizontalNavigation(BrowserView):
     """
-    Media activation helper view
+    Horizontal navigation activation helper view
     """
     implements(IHNavigationActivationView)
 
@@ -46,7 +46,6 @@ class MSHorizontalNavigation(BrowserView):
         return self.is_in_minisite_mode and (IHNavigationActivated.providedBy(context))
 
     def enable_hnavigation(self):
-        import ipdb;ipdb.set_trace()
         context = self.context
         alsoProvides(context, IHNavigationActivated)
         self._redirect((u'Minisite horizontal Navigation enabled on content'))

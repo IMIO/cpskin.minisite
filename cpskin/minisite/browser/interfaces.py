@@ -3,24 +3,24 @@ from zope.interface import Interface
 
 
 class IHNavigationActivationView(Interface):
-    """ media activation """
+    """ Horizontal navigation activation """
 
     can_enable_hnavigation = schema.Bool(
-        u'Can enable multimedia viewlet',
+        u'Can enable horizontal navigation viewlet',
         readonly=True
     )
 
     can_disable_hnavigation = schema.Bool(
-        u'Can disable multimedia viewlet',
+        u'Can disable horizontal navigation viewlet',
         readonly=True
     )
 
     def enable_hnavigation():
-        """ Enable multimedia viewlet
+        """ Enable horizontal navigation viewlet
         """
 
     def disable_hnavigation():
-        """ Disable multimedia viewlet
+        """ Disable horizontal navigation viewlet
         """
 
 
