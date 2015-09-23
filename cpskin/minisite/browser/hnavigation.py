@@ -8,6 +8,7 @@ from zope.interface import alsoProvides
 from zope.interface import implements
 from zope.interface import noLongerProvides
 from cpskin.minisite.minisite import Minisite
+from cpskin.locales import CPSkinMessageFactory as _
 
 
 class MSHorizontalNavigation(BrowserView):
@@ -56,7 +57,7 @@ class MSHorizontalNavigationEnable(BrowserView):
     def __init__(self, context, request):
         super(MSHorizontalNavigationEnable, self).__init__(context, request)
         alsoProvides(context, IHNavigationActivated)
-        _redirect(self, msg=u'Minisite horizontal Navigation enabled on content')
+        _redirect(self, msg=_(u'Minisite horizontal Navigation enabled on content'))
 
 
 class MSHorizontalNavigationDisable(BrowserView):
@@ -67,4 +68,4 @@ class MSHorizontalNavigationDisable(BrowserView):
     def __init__(self, context, request):
         super(MSHorizontalNavigationDisable, self).__init__(context, request)
         noLongerProvides(context, IHNavigationActivated)
-        _redirect(self, msg=u'Minisite horizontal Navigation disabled on content')
+        _redirect(self, msg=_(u'Minisite horizontal Navigation disabled on content'))
