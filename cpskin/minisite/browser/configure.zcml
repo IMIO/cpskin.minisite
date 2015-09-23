@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:faceted="http://namespaces.zope.org/faceted"
+    i18n_domain="cpskin">
+    <browser:page
+        for="*"
+        name="ms_horizontal_navigation"
+        class=".hnavigation.MSHorizontalNavigation"
+        permission="zope.Public"
+        allowed_interface=".interfaces.IHNavigationActivationView"
+        layer="..interfaces.IThemeSpecific"
+        />
+</configure>

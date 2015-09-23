@@ -10,7 +10,8 @@
     <five:registerPackage package="." initialize=".initialize" />
     <include package="plone.app.portlets" />
     <include package="collective.weightedportlets" />
-
+    <include package=".browser" />
+    
     <genericsetup:registerProfile
         name="default"
         title="cpskin.minisite"
