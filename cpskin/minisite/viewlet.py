@@ -25,3 +25,7 @@ class MinisiteViewlet(ViewletBase):
 
 class SearchBoxViewlet(SearchBoxBase):
     index = ViewPageTemplateFile('searchbox_in_minisite.pt')
+
+
+class MinisiteViewletMenu(ViewletBase):
+    index = ViewPageTemplateFile('minisite_menu.pt')
