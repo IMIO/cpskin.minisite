@@ -4,6 +4,10 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     xmlns:faceted="http://namespaces.zope.org/faceted"
     i18n_domain="cpskin">
+
+
+    <include package="plone.app.contentmenu" />
+
     <browser:page
         for="*"
         name="ms_horizontal_navigation"
@@ -12,4 +16,21 @@
         allowed_interface=".interfaces.IHNavigationActivationView"
         layer="..interfaces.IThemeSpecific"
         />
+
+    <browser:page
+        for="*"
+        name="ms_horizontal_navigation_enable"
+        class=".hnavigation.MSHorizontalNavigationEnable"
+        permission="zope.Public"
+        layer="..interfaces.IThemeSpecific"
+        />
+
+    <browser:page
+        for="*"
+        name="ms_horizontal_navigation_disable"
+        class=".hnavigation.MSHorizontalNavigationDisable"
+        permission="zope.Public"
+        layer="..interfaces.IThemeSpecific"
+        />
+
 </configure>
