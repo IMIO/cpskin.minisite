@@ -11,7 +11,7 @@
     <include package="plone.app.portlets" />
     <include package="collective.weightedportlets" />
     <include package=".browser" />
-    
+
     <genericsetup:registerProfile
         name="default"
         title="cpskin.minisite"
@@ -39,7 +39,7 @@
 
    <browser:viewlet
         name="cpskin.minisitemenu"
-        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
         class=".viewlet.MinisiteViewletMenu"
         permission="zope2.View"
         layer=".interfaces.IInMinisite"

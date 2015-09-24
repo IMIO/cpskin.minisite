@@ -1,4 +1,13 @@
-<ul>
-    <li><a href="">Home</a></li>
-    <li>...</li>
+<tal:block i18n:domain="plone">
+<ul tal:define="root view/getNavRootPath;">
+    <li>
+        <a tal:attributes="href root/absolute_url;
+                           title root/Description;
+                           class view/selectedClass">
+           <span tal:omit-tag=""
+                 i18n:translate="tabs_home">Home</span>
+        </a>
+    </li>
+    <li tal:content='view/get_tabs'>...</li>
 </ul>
+</tal:block>

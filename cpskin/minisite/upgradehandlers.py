@@ -2,5 +2,5 @@
 
 
 def add_minisite_menu(context):
-    context.runImportStepFromProfile('profile-cpskin.ministe:default', 'viewlets')
-    context.runImportStepFromProfile('profile-cpskin.ministe:default', 'actions')
+    context.runImportStepFromProfile('profile-cpskin.minisite:default', 'viewlets')
+    context.runImportStepFromProfile('profile-cpskin.minisite:default', 'actions')
