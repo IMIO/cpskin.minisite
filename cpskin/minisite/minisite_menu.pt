@@ -1,13 +1,19 @@
-<tal:block i18n:domain="plone">
-<ul tal:define="root view/getNavRootPath;">
-    <li>
-        <a tal:attributes="href root/absolute_url;
-                           title root/Description;
-                           class view/selectedClass">
-           <span tal:omit-tag=""
-                 i18n:translate="tabs_home">Home</span>
-        </a>
-    </li>
-    <li tal:content='view/get_tabs'>...</li>
-</ul>
-</tal:block>
+<tal:sections tal:define="portal_tabs view/portal_tabs;minisite_menu view/minisite_menu"
+     tal:condition="minisite_menu"
+     i18n:domain="plone">
+    <p class="hiddenStructure" i18n:translate="heading_sections">Navigation</p>
+
+    <ul id="portal-globalnav"
+        tal:define="selected_tab python:view.selected_portal_tab"
+        ><tal:tabs tal:repeat="tab portal_tabs"
+        ><li tal:define="tid tab/id"
+             tal:attributes="id string:portaltab-${tid};
+                            class python:selected_tab==tid and 'selected' or 'plain'"
+            ><a href=""
+               tal:content="tab/name"
+               tal:attributes="href tab/url;
+                               title tab/description|nothing;
+                               target tab/link_target|nothing;">
+            Tab Name
+            </a></li></tal:tabs></ul>
+</tal:sections>

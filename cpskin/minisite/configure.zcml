@@ -104,4 +104,13 @@
         for="zope.processlifetime.IProcessStarting"
         />
 
+    <browser:page
+       for="*"
+       name="portal_tabs_view"
+       class=".viewlet.MinisiteCatalogNavigationTabs"
+       permission="zope.Public"
+       allowed_attributes="topLevelTabs"
+       layer=".interfaces.IInMinisite"
+       />
+       
 </configure>

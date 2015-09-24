@@ -1,11 +1,19 @@
-from zope.component import getMultiAdapter
+from zope.interface import implements
+from Acquisition import aq_base, aq_parent, aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.browser.interfaces import INavigationTabs
+from Products.CMFPlone.browser.navigation import CatalogNavigationTabs
+
 from plone.app.layout.viewlets.common import ViewletBase
+from plone.app.layout.viewlets.common import GlobalSectionsViewlet
 from plone.app.layout.viewlets.common import SearchBoxViewlet as SearchBoxBase
-from plone.app.portlets.portlets.navigation import getRootPath
 from plone import api
+
+from cpskin.minisite.browser.interfaces import IHNavigationActivated
+from cpskin.locales import CPSkinMessageFactory as _
+
+from cpskin.minisite.minisite import Minisite
 HAS_MENU = False
 try:
     from cpskin.menu.interfaces import IFourthLevelNavigation
@@ -57,50 +65,56 @@ def calculate_top_level(context):
     return depth
 
 
-# class MinisiteQueryBuilder(QueryBuilder):
-#     implements(INavigationQueryBuilder)
-#     adapts(Interface, INavigationPortlet)
-#
-#     def __call__(self):
-#         topLevel = calculateTopLevel(self.context, self.portlet)
-#         self.query['path']['navtree_start'] = topLevel + 1
-#         return self.query
-#
-#
-# class MinisiteNavtreeStrategy(NavtreeStrategy):
-#     implements(INavtreeStrategy)
-#     adapts(Interface, INavigationPortlet)
-#
-#     def __init__(self, context, portlet):
-#         NavtreeStrategy.__init__(self, context, portlet)
-#         portal_properties = getToolByName(context, 'portal_properties')
-#         navtree_properties = getattr(portal_properties, 'navtree_properties')
-#         currentFolderOnly = portlet.currentFolderOnly or \
-#             navtree_properties.getProperty('currentFolderOnlyInNavtree', False)
-#         topLevel = calculateTopLevel(context, portlet)
-#         self.rootPath = getRootPath(context, currentFolderOnly, topLevel, portlet.root)
+class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):
+    implements(INavigationTabs)
+
+    def getNavigationMinisitePath(self):
+        minisite = self.request.get('cpskin_minisite', None)
+        if not isinstance(minisite, Minisite):
+            portal = api.portal.get()
+            return '/'.join(portal.getPhysicalPath())
+        else:
+            return minisite.search_path
+
+    def _getNavQuery(self):
+        query = super(MinisiteCatalogNavigationTabs, self)._getNavQuery()
+        rootPath = self.getNavigationMinisitePath()
+        query['path'] = {'query': rootPath, 'depth': 1}
+        return query
+
+    def topLevelTabs(self, actions=None, category='portal_tabs'):
+        result = super(MinisiteCatalogNavigationTabs, self).topLevelTabs(
+            None,
+            'minisite'
+        )
+        item = api.content.get(self.getNavigationMinisitePath())
+
+        home = {'name': _(u'home'),
+                'id': item.getId,
+                'url': item.absolute_url(),
+                'description': item.Description}
+        result.insert(0, home)
+        return result
 
 
-class MinisiteViewletMenu(ViewletBase):
+class MinisiteViewletMenu(GlobalSectionsViewlet):
     index = ViewPageTemplateFile('minisite_menu.pt')
 
-    def get_tabs(self):
-        portal_tabs_view = getMultiAdapter((self.context, self.request),
-                                       name='portal_tabs_view')
+    def get_minisite_root(self):
+        minisite = self.request.get('cpskin_minisite', None)
+        obj = self.context
+        portal = api.portal.get()
+        while (not minisite.search_path == "/".join(obj.getPhysicalPath()) and
+                aq_base(obj) is not aq_base(portal)):
+            parent = aq_parent(aq_inner(obj))
+            if parent is None:
+                return obj
+            obj = parent
+        return obj
 
-
-    def getNavRootPath(self):
-        currentFolderOnly = True
-
-        topLevel = calculate_top_level(self.context)
-        root = '/'.join(
-            api.portal.get_navigation_root(self.context).getPhysicalPath())
-
-        if isinstance(root, unicode):
-            root = str(root)
-        root_path = getRootPath(self.context, currentFolderOnly, topLevel, root)
-        return api.content.get(root_path)
-
-    def selectedClass(self):
-        # if selected...
-        return 'selected'
+    def minisite_menu(self):
+        minisite_root = self.get_minisite_root()
+        if IHNavigationActivated.providedBy(minisite_root):
+            return True
+        else:
+            return False
