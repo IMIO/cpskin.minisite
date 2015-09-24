@@ -41,6 +41,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
+        'cpskin.locales',
         'Plone',
         'plone.api',
         'collective.weightedportlets',
