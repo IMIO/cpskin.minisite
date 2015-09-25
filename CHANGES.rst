@@ -4,7 +4,7 @@ Changelog
 0.2.2 (unreleased)
 ------------------
 
-- Add viewlet menu for minisite.
+- Add a viewlet with an horizontal menu for minisite.
   [bsuttor, cboulanger]
 
 
