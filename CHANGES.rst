@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.2 (unreleased)
+0.3.0 (2015-09-25)
 ------------------
 
 - Add a viewlet with an horizontal menu for minisite.
