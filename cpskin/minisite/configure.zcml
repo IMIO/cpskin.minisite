@@ -37,14 +37,6 @@
         profile="cpskin.minisite:default"
         />
 
-   <browser:viewlet
-        name="cpskin.minisitemenu"
-        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
-        class=".viewlet.MinisiteViewletMenu"
-        permission="zope2.View"
-        layer=".interfaces.IInMinisite"
-        />
-
     <browser:viewlet
         name="cpskin.minisite"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
@@ -99,18 +91,26 @@
         factory=".traverser.MinisiteImageTraverser"
         />
 
-   <subscriber
+    <subscriber
         handler=".startup.registerMinisites"
         for="zope.processlifetime.IProcessStarting"
         />
 
+    <browser:viewlet
+         name="cpskin.minisitemenu"
+         manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+         class=".viewlet.MinisiteViewletMenu"
+         permission="zope2.View"
+         layer=".interfaces.IInMinisiteBase"
+         />
+
     <browser:page
        for="*"
-       name="portal_tabs_view"
+       name="ms_portal_tabs_view"
        class=".viewlet.MinisiteCatalogNavigationTabs"
        permission="zope.Public"
        allowed_attributes="topLevelTabs"
-       layer=".interfaces.IInMinisite"
+       layer=".interfaces.IInMinisiteBase"
        />
-       
+
 </configure>

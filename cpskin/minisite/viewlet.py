@@ -1,4 +1,7 @@
 from zope.interface import implements
+from zope.component import getUtilitiesFor
+
+from zope.component import getMultiAdapter
 from Acquisition import aq_base, aq_parent, aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
@@ -11,9 +14,9 @@ from plone.app.layout.viewlets.common import SearchBoxViewlet as SearchBoxBase
 from plone import api
 
 from cpskin.minisite.browser.interfaces import IHNavigationActivated
-from cpskin.locales import CPSkinMessageFactory as _
 
 from cpskin.minisite.minisite import Minisite
+from cpskin.minisite.interfaces import IMinisiteConfig
 HAS_MENU = False
 try:
     from cpskin.menu.interfaces import IFourthLevelNavigation
@@ -68,6 +71,16 @@ def calculate_top_level(context):
 class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):
     implements(INavigationTabs)
 
+    def getNavigationMinisitePaths(self):
+        portal_path = '/'.join(self.context.getPhysicalPath())
+        configs = getUtilitiesFor(IMinisiteConfig, self.context)
+        result = [
+            config.search_path for name, config in configs
+            if config.search_path.startswith(portal_path)
+        ]
+
+        return result
+
     def getNavigationMinisitePath(self):
         minisite = self.request.get('cpskin_minisite', None)
         if not isinstance(minisite, Minisite):
@@ -84,13 +97,13 @@ class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):
 
     def topLevelTabs(self, actions=None, category='portal_tabs'):
         result = super(MinisiteCatalogNavigationTabs, self).topLevelTabs(
-            None,
+            actions,
             'minisite'
         )
         item = api.content.get(self.getNavigationMinisitePath())
 
-        home = {'name': _(u'home'),
-                'id': item.getId,
+        home = {'name': '<span class="icon-home"></span>',
+                'id': item.getId(),
                 'url': item.absolute_url(),
                 'description': item.Description}
         result.insert(0, home)
@@ -99,6 +112,16 @@ class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):
 
 class MinisiteViewletMenu(GlobalSectionsViewlet):
     index = ViewPageTemplateFile('minisite_menu.pt')
+
+    def update(self):
+        context = aq_inner(self.context)
+        portal_tabs_view = getMultiAdapter((context, self.request),
+                                           name='ms_portal_tabs_view')
+        self.portal_tabs = portal_tabs_view.topLevelTabs()
+
+        self.selected_tabs = self.selectedTabs(portal_tabs=self.portal_tabs)
+
+        self.selected_portal_tab = self.selected_tabs['portal']
 
     def get_minisite_root(self):
         minisite = self.request.get('cpskin_minisite', None)
@@ -114,6 +137,7 @@ class MinisiteViewletMenu(GlobalSectionsViewlet):
 
     def minisite_menu(self):
         minisite_root = self.get_minisite_root()
+
         if IHNavigationActivated.providedBy(minisite_root):
             return True
         else:
