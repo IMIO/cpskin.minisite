@@ -4,7 +4,8 @@ Changelog
 0.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Minisite viewlet is also visible on portal.
+  [bsuttor]
 
 
 0.3.0 (2015-09-25)
