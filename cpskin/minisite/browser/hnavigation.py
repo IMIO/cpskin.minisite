@@ -17,8 +17,10 @@ from cpskin.minisite.minisite import Minisite
 
 def get_minisite_root(context, request):
     minisite = request.get('cpskin_minisite', None)
-    obj = context
     portal = api.portal.get()
+    if not minisite:
+        return portal
+    obj = context
     while (not minisite.search_path == "/".join(obj.getPhysicalPath()) and
             aq_base(obj) is not aq_base(portal)):
         parent = aq_parent(aq_inner(obj))
