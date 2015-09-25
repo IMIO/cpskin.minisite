@@ -4,7 +4,8 @@ Changelog
 0.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add viewlet menu for minisite.
+  [bsuttor, cboulanger]
 
 
 0.2.1 (2015-02-20)
