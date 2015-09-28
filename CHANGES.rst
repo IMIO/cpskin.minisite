@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.2 (unreleased)
+0.3.2 (2015-09-28)
 ------------------
 
 - Add utils for getting minisite object.
