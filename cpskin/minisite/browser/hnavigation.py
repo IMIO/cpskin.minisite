@@ -13,21 +13,7 @@ from cpskin.minisite.browser.interfaces import (IHNavigationActivated,
                                                 IHNavigationActivationView
                                                 )
 from cpskin.minisite.minisite import Minisite
-
-
-def get_minisite_root(context, request):
-    minisite = request.get('cpskin_minisite', None)
-    portal = api.portal.get()
-    if not minisite:
-        return portal
-    obj = context
-    while (not minisite.search_path == "/".join(obj.getPhysicalPath()) and
-            aq_base(obj) is not aq_base(portal)):
-        parent = aq_parent(aq_inner(obj))
-        if parent is None:
-            return obj
-        obj = parent
-    return obj
+from cpskin.minisite.utils import get_minisite_object
 
 
 class MSHorizontalNavigation(BrowserView):
@@ -48,14 +34,12 @@ class MSHorizontalNavigation(BrowserView):
 
     @property
     def can_enable_hnavigation(self):
-        context = self.context
-        minisite_root = get_minisite_root(context, self.request)
+        minisite_root = get_minisite_object(self.request)
         return self.is_in_minisite_mode and not (IHNavigationActivated.providedBy(minisite_root))
 
     @property
     def can_disable_hnavigation(self):
-        context = self.context
-        minisite_root = get_minisite_root(context, self.request)
+        minisite_root = get_minisite_object(self.request)
         return self.is_in_minisite_mode and (IHNavigationActivated.providedBy(minisite_root))
 
 
@@ -77,7 +61,7 @@ class MSHorizontalNavigationEnable(BrowserView):
 
     def __init__(self, context, request):
         super(MSHorizontalNavigationEnable, self).__init__(context, request)
-        alsoProvides(get_minisite_root(context, request), IHNavigationActivated)
+        alsoProvides(get_minisite_object(request), IHNavigationActivated)
         _redirect(self, msg=_(u'Minisite horizontal Navigation enabled on content'))
 
 
@@ -88,5 +72,5 @@ class MSHorizontalNavigationDisable(BrowserView):
 
     def __init__(self, context, request):
         super(MSHorizontalNavigationDisable, self).__init__(context, request)
-        noLongerProvides(get_minisite_root(context, request), IHNavigationActivated)
+        noLongerProvides(get_minisite_object(request), IHNavigationActivated)
         _redirect(self, msg=_(u'Minisite horizontal Navigation disabled on content'))

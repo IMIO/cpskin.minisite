@@ -14,7 +14,7 @@ from plone.app.layout.viewlets.common import SearchBoxViewlet as SearchBoxBase
 from plone import api
 
 from cpskin.minisite.browser.interfaces import IHNavigationActivated
-
+from cpskin.minisite.utils import get_minisite_object
 from cpskin.minisite.minisite import Minisite
 from cpskin.minisite.interfaces import IMinisiteConfig
 HAS_MENU = False
@@ -123,20 +123,8 @@ class MinisiteViewletMenu(GlobalSectionsViewlet):
 
         self.selected_portal_tab = self.selected_tabs['portal']
 
-    def get_minisite_root(self):
-        minisite = self.request.get('cpskin_minisite', None)
-        obj = self.context
-        portal = api.portal.get()
-        while (not minisite.search_path == "/".join(obj.getPhysicalPath()) and
-                aq_base(obj) is not aq_base(portal)):
-            parent = aq_parent(aq_inner(obj))
-            if parent is None:
-                return obj
-            obj = parent
-        return obj
-
     def minisite_menu(self):
-        minisite_root = self.get_minisite_root()
+        minisite_root = get_minisite_object(self.request)
 
         if IHNavigationActivated.providedBy(minisite_root):
             return True
