@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.3 (unreleased)
+0.3.3 (2015-09-28)
 ------------------
 
 - Add css class for home object.
