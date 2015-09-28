@@ -102,17 +102,18 @@ class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):
         )
         item = api.content.get(self.getNavigationMinisitePath())
 
-        home = {'name': '<span class="icon-home"></span>',
+        home = {'name': '',
                 'id': item.getId(),
                 'url': item.absolute_url(),
-                'description': item.Description}
+                'description': item.Description,
+                'class': 'minisite-home'}
         result.insert(0, home)
         return result
 
 
 class MinisiteViewletMenu(GlobalSectionsViewlet):
     index = ViewPageTemplateFile('minisite_menu.pt')
-
+    
     def update(self):
         context = aq_inner(self.context)
         portal_tabs_view = getMultiAdapter((context, self.request),
@@ -122,11 +123,10 @@ class MinisiteViewletMenu(GlobalSectionsViewlet):
         self.selected_tabs = self.selectedTabs(portal_tabs=self.portal_tabs)
 
         self.selected_portal_tab = self.selected_tabs['portal']
+        self.minisite_root = get_minisite_object(self.request)
 
     def minisite_menu(self):
-        minisite_root = get_minisite_object(self.request)
-
-        if IHNavigationActivated.providedBy(minisite_root):
+        if IHNavigationActivated.providedBy(self.minisite_root):
             return True
         else:
             return False

@@ -13,7 +13,8 @@
                     tal:content="structure tab/name"
                     tal:attributes="href tab/url;
                                title tab/description|nothing;
-                               target tab/link_target|nothing;">
+                               target tab/link_target|nothing;
+                               class tab/class | nothing">
                     Tab Name
                 </a>
             </li>
