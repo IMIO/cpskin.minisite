@@ -4,7 +4,8 @@ Changelog
 0.3.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add css class for home object.
+  [bsuttor]
 
 
 0.3.2 (2015-09-28)
