@@ -4,7 +4,8 @@ Changelog
 0.3.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add utils for getting minisite object.
+  [bsuttor]
 
 
 0.3.1 (2015-09-28)
