@@ -13,7 +13,7 @@ from cpskin.minisite.browser.interfaces import (IHNavigationActivated,
                                                 IHNavigationActivationView
                                                 )
 from cpskin.minisite.minisite import Minisite
-from cpskin.minisite.utils import get_minisite_object
+from cpskin.minisite.utils import get_minisite_object, list_minisites
 
 
 class MSHorizontalNavigation(BrowserView):
@@ -24,13 +24,21 @@ class MSHorizontalNavigation(BrowserView):
 
     @property
     def is_in_minisite_mode(self):
-        minisite = self.request.get('cpskin_minisite', None)
-        if not isinstance(minisite, Minisite):
-            return
-        if minisite.is_in_minisite_mode:
-            return True
-        else:
-            return False
+        portal = api.portal.get()
+        minisites = list_minisites(portal)
+        for minisite in minisites:
+            if "/".join(self.context.getPhysicalPath()).startswith(minisite.search_path):
+                return True
+        return False
+        # import ipdb; ipdb.set_trace()
+        #
+        # minisite = self.request.get('cpskin_minisite', None)
+        # if not isinstance(minisite, Minisite):
+        #     return
+        # if minisite.is_in_minisite_mode:
+        #     return True
+        # else:
+        #     return False
 
     @property
     def can_enable_hnavigation(self):

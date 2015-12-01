@@ -1,4 +1,6 @@
 from plone import api
+from cpskin.minisite.interfaces import IMinisiteConfig
+from zope.component import getUtilitiesFor
 
 
 def get_minisite_object(request):
@@ -14,3 +16,13 @@ def get_minisite_navigation_level(minisite_obj):
     minisite_physical_path = minisite_obj.getPhysicalPath()
     minisite_path = [elem for elem in list(minisite_physical_path) if elem not in list(portal_physical_path)]
     return len(minisite_path)
+
+
+def list_minisites(portal):
+    portal_path = '/'.join(portal.getPhysicalPath())
+    configs = getUtilitiesFor(IMinisiteConfig, portal)
+    result = [
+        config for name, config in configs
+        if config.search_path.startswith(portal_path)
+    ]
+    return result

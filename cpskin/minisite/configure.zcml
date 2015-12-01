@@ -86,6 +86,13 @@
 
     <adapter
         provides="zope.publisher.interfaces.browser.IBrowserPublisher"
+        for="plone.app.contenttypes.interfaces.IFolder
+            .interfaces.IThemeSpecific"
+        factory=".traverser.MinisiteTraverser"
+        />
+
+    <adapter
+        provides="zope.publisher.interfaces.browser.IBrowserPublisher"
         for="plone.app.imaging.interfaces.IBaseObject
             .interfaces.IThemeSpecific"
         factory=".traverser.MinisiteImageTraverser"

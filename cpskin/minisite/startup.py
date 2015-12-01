@@ -45,9 +45,10 @@ def registerMinisitesFromFile(filename):
 
 
 def registerMinisite(config):
-    logger.debug('Register minisite at {} for {}'.format(
-        config.main_portal_url,
-        config.minisite_url,
+    logger.debug(
+        'Register minisite at {} for {}'.format(
+            config.main_portal_url,
+            config.minisite_url,
         )
     )
     provideUtility(
