@@ -4,7 +4,8 @@ Changelog
 0.3.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Traverse also into plone.app.contenttypes folders.
+  [bsuttor]
 
 
 0.3.3 (2015-09-28)
