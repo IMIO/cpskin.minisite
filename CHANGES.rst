@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.4 (unreleased)
+0.3.4 (2015-12-01)
 ------------------
 
 - Traverse also into plone.app.contenttypes folders.
