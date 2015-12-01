@@ -46,6 +46,7 @@ setup(
         'plone.api',
         'collective.weightedportlets',
         'cpskin.locales',
+        'plone.app.contenttypes',
     ],
     extras_require={
         'test': [
