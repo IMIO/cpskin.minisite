@@ -28,12 +28,29 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <genericsetup:registerProfile
+        name="to0003"
+        title="cpskin.minisite: migrate to 0003"
+        directory="upgrades/to0003"
+        description="cpskin.minisite: migrate to 0003"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
     <genericsetup:upgradeStep
         title="cpskin.minisite: add menu viewlet"
         description="Add viewlet which can be visible or not visible"
         handler=".upgradehandlers.add_minisite_menu"
         source="0001"
         destination="0002"
+        profile="cpskin.minisite:default"
+        />
+
+    <genericsetup:upgradeStep
+        title="cpskin.minisite: move cpskin actions"
+        description="Upgrade step for moving CPSkin actions to new menu"
+        handler=".upgradehandlers.move_cpskin_actions"
+        source="0002"
+        destination="0003"
         profile="cpskin.minisite:default"
         />
 

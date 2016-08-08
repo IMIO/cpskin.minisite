@@ -189,11 +189,9 @@ Minisite action to show/hide horizontal navigation menu
     Go to  ${SUBDOMAIN_PLONE_URL}/minisite
     Page should contain  Mini site
     Page should contain minisite viewlet
-    Click element  css=#plone-contentmenu-actions a
-    Click element  css=#plone-contentmenu-actions-enable_hnavigation
+    Click CPSkin Configuration by id  enable_hnavigation
     Page should contain  Minisite horizontal Navigation enabled on content
-    Click element  css=#plone-contentmenu-actions a
-    Click element  css=#plone-contentmenu-actions-disable_hnavigation
+    Click CPSkin Configuration by id  disable_hnavigation
     Page should contain  Minisite horizontal Navigation disabled on content
     Page should not contain  Minisite horizontal Navigation enabled on content
 
@@ -220,3 +218,13 @@ Exclude from navigation
     Click Link  id=fieldsetlegend-settings
     Select Checkbox  id=excludeFromNav
     Click Button  Save
+
+Open CPSkin Configuration Menu
+    Open Menu  plone-contentmenu-cpskin-configurations
+
+Click CPSkin Configuration by id
+    [arguments]  ${name}
+
+    Open CPSkin Configuration Menu
+    Element Should be visible  css=dl#plone-contentmenu-cpskin-configurations dd.actionMenuContent  #plone-contentmenu-cpskin-configurations-${name}
+    Click Link  id=plone-contentmenu-cpskin-configurations-${name}

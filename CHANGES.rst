@@ -4,6 +4,9 @@ Changelog
 0.3.5 (unreleased)
 ------------------
 
+- Move CPSkin actions to a new dedicated menu
+  [laulaz]
+
 - Fix / improve tests interfering with footer sitemap content
   [laulaz]
 
