@@ -1,6 +1,7 @@
 *** Settings ***
 
 Resource  plone/app/robotframework/selenium.robot
+Resource  plone/app/robotframework/keywords.robot
 Library  Remote  ${PLONE_URL}/RobotRemote
 library  DebugLibrary
 Suite Setup  Start browser
@@ -163,6 +164,10 @@ Minisite mode Search with searchbox in minisite as subfolder does show all conte
     Create content  id=to_find  type=Folder  title=To find in folder  container=${folder}
     ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description  container=${folder}
     Create content  id=to_find  type=Folder  title=To find in minisite  container=${minisite}
+    Go to  ${SUBDOMAIN_PLONE_URL}/folder/to_find
+    Exclude from navigation
+    Go to  ${SUBDOMAIN_PLONE_URL}/folder/minisite/to_find
+    Exclude from navigation
     Go to  ${SUBDOMAIN_PLONE_URL}/folder/minisite
     Page should contain  Mini site
     Page should contain minisite viewlet
@@ -209,3 +214,9 @@ Page should contain minisite portlet
 
 Page should not contain minisite portlet
     Page should not contain element  css=#portlet-minisite
+
+Exclude from navigation
+    Click Edit In Edit bar
+    Click Link  id=fieldsetlegend-settings
+    Select Checkbox  id=excludeFromNav
+    Click Button  Save

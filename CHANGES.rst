@@ -4,7 +4,8 @@ Changelog
 0.3.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix / improve tests interfering with footer sitemap content
+  [laulaz]
 
 
 0.3.4 (2015-12-01)
