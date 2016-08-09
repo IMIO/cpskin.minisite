@@ -47,6 +47,7 @@ Minisite does not show minisite viewlet nor portlet in portal mode
     Page should not contain minisite portlet
     Page should contain element  css=div.searchSection
     Element should be visible  css=div.searchSection
+    Page should contain element  css=#viewlet-minisite-actions
 
 Minisite does show minisite viewlet and portlet in minisite mode
     Enable autologin as  Manager
@@ -57,6 +58,7 @@ Minisite does show minisite viewlet and portlet in minisite mode
     Page should contain minisite portlet
     Page should contain element  css=div.searchSection
     Element should not be visible  css=div.searchSection
+    Page should contain element  css=#viewlet-minisite-actions
 
 Minisite viewlet link in minisite mode leads to same page in portal mode
     Enable autologin as  Manager
@@ -194,6 +196,21 @@ Minisite action to show/hide horizontal navigation menu
     Click CPSkin Configuration by id  disable_hnavigation
     Page should contain  Minisite horizontal Navigation disabled on content
     Page should not contain  Minisite horizontal Navigation enabled on content
+
+Minisite actions viewlet shows tagged content
+    Enable autologin as  Manager
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
+    ${subfolder}=  Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
+    Create content  id=mydocument  type=Document  title=My document  container=${subfolder}
+    Go to  ${PLONE_URL}/minisite/subfolder/mydocument
+    Click Edit In Edit bar
+    Click Link  Categorization
+    Input Text  css=#hiddenTags_keywords  minisite-action
+    Click Button  Save
+    Element Should Contain  id=hidden-tags  minisite-action
+    Go to  ${PLONE_URL}/minisite
+    Page should contain  My document
+
 
 *** Keywords ***
 

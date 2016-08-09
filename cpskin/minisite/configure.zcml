@@ -8,6 +8,7 @@
     i18n_domain="cpskin">
 
     <five:registerPackage package="." initialize=".initialize" />
+    <include package="cpskin.core" />
     <include package="plone.app.portlets" />
     <include package="collective.weightedportlets" />
     <include package=".browser" />
@@ -54,12 +55,29 @@
         profile="cpskin.minisite:default"
         />
 
+    <genericsetup:upgradeStep
+        title="cpskin.minisite: add actions viewlet"
+        description="Upgrade step for adding the actions viewlet"
+        handler=".upgradehandlers.add_actions_viewlet"
+        source="0003"
+        destination="0004"
+        profile="cpskin.minisite:default"
+        />
+
     <browser:viewlet
         name="cpskin.minisite"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
         class=".viewlet.MinisiteViewlet"
         permission="zope2.View"
         layer=".interfaces.IInMinisite"
+        />
+
+    <browser:viewlet
+        name="cpskin.minisite.actions"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        class=".viewlet.MinisiteActionsViewlet"
+        permission="zope2.View"
+        layer=".interfaces.IInMinisiteBase"
         />
 
     <browser:viewlet

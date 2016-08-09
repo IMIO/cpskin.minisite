@@ -1,0 +1,15 @@
+<div id="viewlet-minisite-actions"
+     i18n:domain="cpskin"
+     i18n:translate="">
+
+     <ul tal:define="actions view/actions"
+         tal:condition="actions">
+         <li tal:repeat="action actions">
+             <a href=""
+                tal:content="action/Title"
+                tal:attributes="href action/getURL;
+                                title action/description|nothing"></a>
+         </li>
+     </ul>
+
+</div>

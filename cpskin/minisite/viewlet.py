@@ -42,6 +42,22 @@ class MinisiteViewlet(ViewletBase):
         return '/'.join((root_url_in_portal_mode, relative_url))
 
 
+class MinisiteActionsViewlet(ViewletBase):
+    index = ViewPageTemplateFile('minisite_actions.pt')
+
+    def actions(self):
+        minisite = self.request.get('cpskin_minisite', None)
+        if not isinstance(minisite, Minisite):
+            return []
+        portal = api.portal.get()
+        minisiteRoot = portal.unrestrictedTraverse(minisite.search_path)
+        actions = api.content.find(
+            context=minisiteRoot,
+            hiddenTags='minisite-action',
+        )
+        return actions
+
+
 class SearchBoxViewlet(SearchBoxBase):
     index = ViewPageTemplateFile('searchbox_in_minisite.pt')
 
