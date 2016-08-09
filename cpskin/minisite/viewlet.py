@@ -2,7 +2,7 @@ from zope.interface import implements
 from zope.component import getUtilitiesFor
 
 from zope.component import getMultiAdapter
-from Acquisition import aq_base, aq_parent, aq_inner
+from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationTabs
@@ -113,7 +113,7 @@ class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):
 
 class MinisiteViewletMenu(GlobalSectionsViewlet):
     index = ViewPageTemplateFile('minisite_menu.pt')
-    
+
     def update(self):
         context = aq_inner(self.context)
         portal_tabs_view = getMultiAdapter((context, self.request),
