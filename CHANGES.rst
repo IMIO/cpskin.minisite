@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.5 (unreleased)
+0.4.0 (2016-08-09)
 ------------------
 
 - Move CPSkin actions to a new dedicated menu
