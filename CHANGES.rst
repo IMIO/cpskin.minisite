@@ -4,7 +4,7 @@ Changelog
 0.4.1 (unreleased)
 ------------------
 
-- Add new viewlet with local actions (in minisites) : content tagged with
+- Add local actions (in minisites) to minisite viewlet : content tagged with
   'minisite-action' hidden keyword appears there
   [laulaz]
 

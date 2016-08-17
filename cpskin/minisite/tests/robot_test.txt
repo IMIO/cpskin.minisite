@@ -47,7 +47,6 @@ Minisite does not show minisite viewlet nor portlet in portal mode
     Page should not contain minisite portlet
     Page should contain element  css=div.searchSection
     Element should be visible  css=div.searchSection
-    Page should contain element  css=#viewlet-minisite-actions
 
 Minisite does show minisite viewlet and portlet in minisite mode
     Enable autologin as  Manager
@@ -58,7 +57,6 @@ Minisite does show minisite viewlet and portlet in minisite mode
     Page should contain minisite portlet
     Page should contain element  css=div.searchSection
     Element should not be visible  css=div.searchSection
-    Page should contain element  css=#viewlet-minisite-actions
 
 Minisite viewlet link in minisite mode leads to same page in portal mode
     Enable autologin as  Manager

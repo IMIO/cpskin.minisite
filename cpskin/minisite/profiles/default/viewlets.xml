@@ -5,6 +5,5 @@
   </order>
   <order manager="plone.abovecontent" skinname="*">
     <viewlet name="cpskin.minisite" />
-    <viewlet name="cpskin.minisite.actions" />
   </order>
 </object>
