@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4.1 (unreleased)
+0.5.0 (2016-08-17)
 ------------------
 
 - Add local actions (in minisites) to minisite viewlet : content tagged with
