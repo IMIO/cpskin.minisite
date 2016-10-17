@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5.1 (unreleased)
+0.5.1 (2016-10-17)
 ------------------
 
 - Ensure minisite actions are sorted correctly (position in parent folder)
