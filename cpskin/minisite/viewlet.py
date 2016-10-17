@@ -140,5 +140,6 @@ class MinisiteViewletMenu(GlobalSectionsViewlet):
         actions = api.content.find(
             context=minisiteRoot,
             hiddenTags='minisite-action',
+            sort_on='getObjPositionInParent',
         )
         return actions

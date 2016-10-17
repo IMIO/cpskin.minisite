@@ -4,7 +4,8 @@ Changelog
 0.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Ensure minisite actions are sorted correctly (position in parent folder)
+  [laulaz]
 
 
 0.5.0 (2016-08-17)
