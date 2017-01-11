@@ -158,7 +158,6 @@ Search with searchbox in minisite as subfolder does show all content
     Page should contain  To find in folder
 
 Minisite mode Search with searchbox in minisite as subfolder does show all content
-    [Tags]  rob_current 
     Enable autologin as  Manager
     ${folder}=  Create content  id=folder  type=Folder  title=Folder
     Create content  id=to_find  type=Folder  title=To find in folder  container=${folder}
@@ -190,21 +189,22 @@ Minisite action to show/hide horizontal navigation menu
     Page should contain  Mini site
     Page should contain minisite viewlet
     Click CPSkin Configuration by id  enable_hnavigation
-    Page should contain  Minisite horizontal Navigation enabled on content
+    Page should contain  Activer le menu horizontal de navigation du minisite
     Click CPSkin Configuration by id  disable_hnavigation
-    Page should contain  Minisite horizontal Navigation disabled on content
-    Page should not contain  Minisite horizontal Navigation enabled on content
+    Page should contain  Désactiver le menu horizontal de navigation du minisite
+    Page should not contain  Activer le menu horizontal de navigation du minisite
 
 Minisite actions viewlet shows tagged content
+    [Tags]  rob_current
     Enable autologin as  Manager
     ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
     ${subfolder}=  Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
     Create content  id=mydocument  type=Document  title=My document  container=${subfolder}
     Go to  ${PLONE_URL}/minisite/subfolder/mydocument
-    Click Edit In Edit bar
-    Click Link  Categorization
+    Click Link  css=#contentview-edit a
+    Click Link  css=#fieldsetlegend-categorization
     Input Text  css=#hiddenTags_keywords  minisite-action
-    Click Button  Save
+    Click Button  Enregistrer
     Element Should Contain  id=hidden-tags  minisite-action
     Go to  ${PLONE_URL}/minisite
     Page should contain  My document
@@ -229,10 +229,10 @@ Page should not contain minisite portlet
     Page should not contain element  css=#portlet-minisite
 
 Exclude from navigation
-    Click Edit In Edit bar
+    Click Link  css=#contentview-edit a
     Click Link  id=fieldsetlegend-settings
     Select Checkbox  id=excludeFromNav
-    Click Button  Save
+    Click Button  Enregistrer
 
 Open CPSkin Configuration Menu
     Open Menu  plone-contentmenu-cpskin-configurations
