@@ -30,15 +30,6 @@ class MSHorizontalNavigation(BrowserView):
             if "/".join(self.context.getPhysicalPath()).startswith(minisite.search_path):
                 return True
         return False
-        # import ipdb; ipdb.set_trace()
-        #
-        # minisite = self.request.get('cpskin_minisite', None)
-        # if not isinstance(minisite, Minisite):
-        #     return
-        # if minisite.is_in_minisite_mode:
-        #     return True
-        # else:
-        #     return False
 
     @property
     def can_enable_hnavigation(self):
