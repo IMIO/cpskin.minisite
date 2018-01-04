@@ -28,7 +28,7 @@ def registerMinisitesFromFile(filename):
         config.read(filename)
     except ConfigParser.MissingSectionHeaderError:
         return
-    logger.debug('Register minisites from file {}'.format(filename))
+    logger.info('Register minisites from file {}'.format(filename))
     for section in config.sections():
         try:
             portal_url = config.get(section, 'portal_url')
