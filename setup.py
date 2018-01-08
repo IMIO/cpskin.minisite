@@ -47,6 +47,7 @@ setup(
         'plone.app.contenttypes',
         'cpskin.core',
         'cpskin.locales',
+        'cpskin.workflow',
     ],
     extras_require={
         'test': [
