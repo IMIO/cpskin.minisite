@@ -47,12 +47,12 @@ setup(
         'plone.app.contenttypes',
         'cpskin.core',
         'cpskin.locales',
-        'cpskin.workflow',
     ],
     extras_require={
         'test': [
             'plone.app.testing',
             'plone.app.robotframework [debug]',
+            'cpskin.workflow',
         ],
     },
     entry_points={},
