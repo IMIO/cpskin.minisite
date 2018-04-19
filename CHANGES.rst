@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5.2 (unreleased)
+0.5.2 (2018-04-19)
 ------------------
 
 - Allow registration on minisite
