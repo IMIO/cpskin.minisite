@@ -4,7 +4,8 @@ Changelog
 0.5.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Allow registration on minisite
+  [mpeeters]
 
 
 0.5.1 (2016-10-17)
