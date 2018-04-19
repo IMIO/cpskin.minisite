@@ -53,6 +53,7 @@ setup(
             'plone.app.testing',
             'plone.app.robotframework [debug]',
             'cpskin.workflow',
+            'cpskin.core [test]',
         ],
     },
     entry_points={},

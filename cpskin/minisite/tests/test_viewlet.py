@@ -1,4 +1,4 @@
-import unittest2 as unittest
+import unittest
 from zope.component import queryMultiAdapter
 from zope.viewlet.interfaces import IViewletManager
 from plone.app.testing import TEST_USER_ID
