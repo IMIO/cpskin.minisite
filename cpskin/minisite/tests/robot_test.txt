@@ -195,7 +195,6 @@ Minisite action to show/hide horizontal navigation menu
     Page should not contain  Activer le menu horizontal de navigation du minisite
 
 Minisite actions viewlet shows tagged content
-    [Tags]  rob_current
     Enable autologin as  Manager
     ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
     ${subfolder}=  Create content  id=subfolder  type=Folder  title=Subfolder  container=${minisite}
@@ -209,6 +208,17 @@ Minisite actions viewlet shows tagged content
     Go to  ${PLONE_URL}/minisite
     Page should contain  My document
 
+Registration form should be available on minisite
+    [Tags]  rob_current
+    Enable autologin as  Manager
+    Go to  ${PLONE_URL}/@@register
+    Page should contain  Formulaire d'inscription
+    ${minisite}=  Create content  id=minisite  type=Folder  title=Mini site  description=Mini site description
+    Go to  ${PLONE_URL}/minisite/@@register
+    Page should contain  Formulaire d'inscription
+    Create content  id=test  type=Folder  title=Test folder
+    Go to  ${PLONE_URL}/test/@@register
+    Page should not contain  Formulaire d'inscription
 
 *** Keywords ***
 

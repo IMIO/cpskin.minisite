@@ -33,4 +33,14 @@
         layer="..interfaces.IThemeSpecific"
         />
 
+    <include package="plone.app.users"/>
+
+    <browser:page
+        for="*"
+        name="register"
+        class="plone.app.users.browser.register.RegistrationForm"
+        permission="cmf.AddPortalMember"
+        layer="..interfaces.IInMinisiteBase"
+        />
+
 </configure>
