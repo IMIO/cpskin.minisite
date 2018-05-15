@@ -47,6 +47,7 @@ setup(
         'plone.app.contenttypes',
         'cpskin.core',
         'cpskin.locales',
+        'plone.rest',
     ],
     extras_require={
         'test': [

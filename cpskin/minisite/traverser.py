@@ -11,8 +11,10 @@ from cpskin.minisite.minisite import decorateRequest
 from cpskin.minisite.portlet import checkPortlet
 from cpskin.minisite import logger
 
+from plone.rest.traverse import RESTTraverse
 
-class MinisiteTraverser(DefaultPublishTraverse):
+
+class MinisiteTraverser(RESTTraverse):
 
     def publishTraverse(self, request, name):
         result = super(MinisiteTraverser, self).publishTraverse(
