@@ -1,11 +1,13 @@
 *** Settings ***
 
-Resource  plone/app/robotframework/selenium.robot
 Resource  plone/app/robotframework/keywords.robot
+Resource  plone/app/robotframework/selenium.robot
+
 Library  Remote  ${PLONE_URL}/RobotRemote
 library  DebugLibrary
-Suite Setup  Start browser
-Suite Teardown  Close All Browsers
+
+Test Setup  Open test browser
+Test Teardown  Close all browsers
 
 *** Variables ***
 
@@ -222,8 +224,6 @@ Registration form should be available on minisite
 
 *** Keywords ***
 
-Start browser
-    Open browser  http://localhost:55001/plone/  browser=${BROWSER}
 
 Page should contain minisite viewlet
     Page should contain element  css=#viewlet-minisite

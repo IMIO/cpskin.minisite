@@ -1,11 +1,11 @@
-from plone.app.testing import PloneWithPackageLayer
-from plone.app.testing import IntegrationTesting
-from plone.app.testing import FunctionalTesting
-from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
+# -*- coding: utf-8 -*-
+# from plone import api
 from plone.app.controlpanel.security import ISecuritySchema
-
+from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PloneWithPackageLayer
 from plone.testing import z2
-from plone import api
 
 import cpskin.minisite
 
@@ -26,9 +26,9 @@ CPSKIN_MINISITE = CPSkinMinisiteLayer(
 
 CPSKIN_MINISITE_INTEGRATION_TESTING = IntegrationTesting(
     bases=(CPSKIN_MINISITE,),
-    name="CPSKIN_MINISITE_INTEGRATION_TESTING"
+    name='CPSKIN_MINISITE_INTEGRATION_TESTING'
 )
 CPSKIN_MINISITE_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(CPSKIN_MINISITE, z2.ZSERVER_FIXTURE, REMOTE_LIBRARY_BUNDLE_FIXTURE),
-    name="CPSKIN_MINISITE_FUNCTIONAL_TESTING"
+    name='CPSKIN_MINISITE_FUNCTIONAL_TESTING'
 )
