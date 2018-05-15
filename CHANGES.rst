@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5.3 (unreleased)
+0.5.3 (2018-05-15)
 ------------------
 
 - Minisite publishTraverse inherit of REST plublishTraverse to work with plone.restapi.
