@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
-from zope.component import queryUtility
-
-from ZPublisher.BaseRequest import DefaultPublishTraverse
-
-from plone.app.imaging.traverse import ImageTraverser
-from Products.CMFCore.interfaces import IContentish
-
+from cpskin.minisite import logger
 from cpskin.minisite.interfaces import IMinisiteConfig
 from cpskin.minisite.minisite import decorateRequest
 from cpskin.minisite.portlet import checkPortlet
-from cpskin.minisite import logger
-
+from plone.app.imaging.traverse import ImageTraverser
 from plone.rest.traverse import RESTTraverse
+from Products.CMFCore.interfaces import IContentish
+from zope.component import queryUtility
 
 
 class MinisiteTraverser(RESTTraverse):
@@ -20,8 +15,8 @@ class MinisiteTraverser(RESTTraverse):
         result = super(MinisiteTraverser, self).publishTraverse(
             request, name)
         if IContentish.providedBy(result):
-            path = "/".join(result.getPhysicalPath())
-            logger.debug('Traversing {}'.format(path))
+            path = '/'.join(result.getPhysicalPath())
+            logger.debug('Traversing {0}'.format(path))
             config = queryUtility(IMinisiteConfig, name=path)
             decorateRequest(request, config)
             checkPortlet(request, config)
@@ -34,8 +29,8 @@ class MinisiteImageTraverser(ImageTraverser):
         result = super(MinisiteImageTraverser, self).publishTraverse(
             request, name)
         if IContentish.providedBy(result):
-            path = "/".join(result.getPhysicalPath())
-            logger.debug('Traversing {}'.format(path))
+            path = '/'.join(result.getPhysicalPath())
+            logger.debug('Traversing {0}'.format(path))
             config = queryUtility(IMinisiteConfig, name=path)
             decorateRequest(request, config)
             checkPortlet(request, config)
