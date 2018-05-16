@@ -4,7 +4,8 @@ Changelog
 0.5.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix publishTraverse to work with plone.restapi.
+  [bsuttor]
 
 
 0.5.3 (2018-05-15)
