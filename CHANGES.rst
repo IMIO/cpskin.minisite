@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5.4 (unreleased)
+0.5.4 (2018-05-16)
 ------------------
 
 - Fix publishTraverse to work with plone.restapi.
