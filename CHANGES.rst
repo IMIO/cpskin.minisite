@@ -4,7 +4,8 @@ Changelog
 0.5.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Improve minisites_panel view.
+  [bsuttor]
 
 
 0.5.4 (2018-05-16)
