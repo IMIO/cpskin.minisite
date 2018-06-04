@@ -2,7 +2,8 @@ language: python
 python: 2.7
 install:
   - mkdir -p buildout-cache/downloads
-  - python bootstrap.py -c travis.cfg
+  - virtualenv -p python2.7 .
+  - bin/pip install -r requiremets.txt
   - bin/buildout -c travis.cfg -N
 before_script:
   - "export DISPLAY=:99.0"
