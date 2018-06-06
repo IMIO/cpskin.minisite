@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5.5 (unreleased)
+0.5.5 (2018-06-06)
 ------------------
 
 - Use collective.redirectacquired to block acquisition : #21570
