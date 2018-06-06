@@ -11,6 +11,7 @@
     <include package="cpskin.core" />
     <include package="plone.app.portlets" />
     <include package="collective.weightedportlets" />
+    <include package="collective.redirectacquired" />
     <include package=".browser" />
 
     <genericsetup:registerProfile
