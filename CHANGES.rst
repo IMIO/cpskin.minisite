@@ -4,6 +4,9 @@ Changelog
 0.5.5 (unreleased)
 ------------------
 
+- Use collective.redirectacquired to block acquisition : #21570
+  [laulaz]
+
 - Improve minisites_panel view.
   [bsuttor]
 
