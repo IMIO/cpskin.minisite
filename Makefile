@@ -20,3 +20,7 @@ instance: buildout
 
 cleanall:
 	rm -rf bin develop-eggs downloads include lib parts .installed.cfg .mr.developer.cfg bootstrap.py parts/omelette
+
+docker-test:
+	docker pull docker-staging.imio.be/iasmartweb/test:$(shell id -u)
+	docker run -u $(shell id -u):$(shell id -g) --rm -v "$(shell pwd):/src" -w /src docker-staging.imio.be/iasmartweb/test:$(shell id -u) bash -c 'virtualenv -p python2.7 . && bin/pip install -r requirements.txt && bin/buildout && /etc/init.d/xvfb start && bin/test --all'
