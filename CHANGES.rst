@@ -4,7 +4,8 @@ Changelog
 0.5.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- 'sitemap.xml.gz' view is now callable from minisites.
+  [bsuttor]
 
 
 0.5.5 (2018-06-06)

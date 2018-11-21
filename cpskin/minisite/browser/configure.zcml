@@ -33,6 +33,7 @@
         layer="..interfaces.IThemeSpecific"
         />
 
+
     <include package="plone.app.users"/>
 
     <browser:page
@@ -41,6 +42,14 @@
         class="plone.app.users.browser.register.RegistrationForm"
         permission="cmf.AddPortalMember"
         layer="..interfaces.IInMinisiteBase"
+        />
+
+    <browser:page
+        name="sitemap.xml.gz"
+        for="..interfaces.IMinisiteRoot"
+        class="plone.app.layout.sitemap.sitemap.SiteMapView"
+        permission="zope2.Public"
+        layer="..interfaces.IThemeSpecific"
         />
 
 </configure>

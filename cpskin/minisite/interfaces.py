@@ -1,5 +1,6 @@
-from zope.interface import Interface
+# -*- coding: utf-8 -*-
 from plone.theme.interfaces import IDefaultPloneLayer
+from zope.interface import Interface
 
 
 class IThemeSpecific(IDefaultPloneLayer):
@@ -28,3 +29,7 @@ class IInMinisite(IInMinisiteBase):
 
 class IMinisiteConfig(Interface):
     """Minisite data"""
+
+
+class IMinisiteRoot(Interface):
+    """Minisite Root"""

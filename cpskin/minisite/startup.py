@@ -1,14 +1,21 @@
+# -*- coding: utf-8 -*-
+from cpskin.minisite import logger
+from cpskin.minisite.interfaces import IMinisiteRoot
+from cpskin.minisite.minisite import MinisiteConfig
+from plone import api
+from transaction import commit
+from zope.component import provideUtility
+from zope.component.hooks import setSite
+from zope.interface import alsoProvides
+from zope.interface import noLongerProvides
+
 import ConfigParser
 import os.path
-
-from zope.component import provideUtility
-
-from cpskin.minisite.minisite import MinisiteConfig
-from cpskin.minisite import logger
+import Zope2
 
 
 def registerMinisites(event):
-    CLIENT_HOME = os.environ["CLIENT_HOME"]
+    CLIENT_HOME = os.environ['CLIENT_HOME']
     minisites_directory = os.path.join(CLIENT_HOME, 'minisites')
     if os.path.exists(minisites_directory):
         registerMinisitesFromDirectory(minisites_directory)
@@ -16,10 +23,12 @@ def registerMinisites(event):
 
 def registerMinisitesFromDirectory(directory):
     files = os.listdir(directory)
+    minisite_paths = []
     for filename in files:
         filename = os.path.join(directory, filename)
         if os.path.isfile(filename):
-            registerMinisitesFromFile(filename)
+            minisite_paths.append(registerMinisitesFromFile(filename))
+    markMinisites(minisite_paths)
 
 
 def registerMinisitesFromFile(filename):
@@ -28,7 +37,7 @@ def registerMinisitesFromFile(filename):
         config.read(filename)
     except ConfigParser.MissingSectionHeaderError:
         return
-    logger.debug('Register minisites from file {}'.format(filename))
+    logger.debug('Register minisites from file {0}'.format(filename))
     for section in config.sections():
         try:
             portal_url = config.get(section, 'portal_url')
@@ -40,13 +49,39 @@ def registerMinisitesFromFile(filename):
                 filename=filename,
             )
             registerMinisite(minisite)
+            return section
         except KeyError:
             continue
 
 
+def markMinisites(minisite_paths):
+    app = Zope2.app()
+    if not minisite_paths:
+        return
+    # we suppose plone is in first level of zope
+    portal_path = filter(None, minisite_paths[0].split('/'))[0]
+    plonesite = app.get(portal_path)
+    setSite(plonesite)
+    catalog = plonesite.portal_catalog
+    brains = catalog({
+        'object_provides': IMinisiteRoot.__identifier__,
+    })
+    for brain in brains:
+        obj = brain.getObject()
+        noLongerProvides(obj, IMinisiteRoot)
+        logger.info('{0} unmark as minisite'.format(obj.absolute_url()))
+
+    for minisite_path in minisite_paths:
+        minisite_root = api.content.get(minisite_path)
+        if minisite_root.portal_type != 'Link':
+            alsoProvides(minisite_root, IMinisiteRoot)
+            logger.info('{0} folder mark as minisite'.format(minisite_path))
+    commit()
+
+
 def registerMinisite(config):
     logger.debug(
-        'Register minisite at {} for {}'.format(
+        'Register minisite at {0} for {1}'.format(
             config.main_portal_url,
             config.minisite_url,
         )
