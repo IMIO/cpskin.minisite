@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from cpskin.minisite.interfaces import IMinisiteConfig
+from Products.CMFCore.utils import getToolByName
 from plone import api
 from zope.component import getUtilitiesFor
 
@@ -27,3 +28,17 @@ def list_minisites(portal):
         if config.search_path.startswith(portal_path)
     ]
     return result
+
+
+def url_in_portal_mode(context, request):
+    portal_url = getToolByName(context, 'portal_url')
+    relative_url = portal_url.getRelativeContentURL(context)
+    portal = portal_url.getPortalObject()
+    main_portal_url = request.cpskin_minisite.main_portal_url
+    minisite_url = request.cpskin_minisite.minisite_url
+    root_url = portal.absolute_url()
+    root_url_in_portal_mode = root_url.replace(
+        minisite_url,
+        main_portal_url
+    )
+    return '/'.join((root_url_in_portal_mode, relative_url))

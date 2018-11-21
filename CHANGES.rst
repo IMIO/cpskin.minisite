@@ -4,6 +4,10 @@ Changelog
 0.5.6 (unreleased)
 ------------------
 
+- Redirect requests that use acquisition to access portal content from
+  minisites.
+  [laulaz]
+
 - Remove IMinisiteRoot marker interface on uninstall.
   [bsuttor]
 

@@ -132,6 +132,10 @@
         for="zope.processlifetime.IProcessStarting"
         />
 
+    <subscriber
+        handler=".traverser.redirect"
+        />
+
     <browser:viewlet
          name="cpskin.minisitemenu"
          manager="plone.app.layout.viewlets.interfaces.IPortalTop"

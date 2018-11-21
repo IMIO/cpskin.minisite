@@ -1,14 +1,27 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from collective.redirectacquired.traverse import LogAcquiredImageTraverser
 from collective.redirectacquired.traverse import LogAcquiredPublishTraverse
 from cpskin.minisite import logger
 from cpskin.minisite.interfaces import IMinisiteConfig
 from cpskin.minisite.minisite import decorateRequest
 from cpskin.minisite.portlet import checkPortlet
+from cpskin.minisite.utils import get_minisite_object
+from cpskin.minisite.utils import url_in_portal_mode
+from OFS.interfaces import IItem
+from plone import api
 from plone.rest.interfaces import IAPIRequest
 from plone.rest.traverse import RESTTraverse
 from Products.CMFCore.interfaces import IContentish
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_hasattr
+from zExceptions import Redirect
+from zope.component import adapter
+from zope.component import queryMultiAdapter
 from zope.component import queryUtility
+from ZPublisher.interfaces import IPubAfterTraversal
 
 
 class MinisiteTraverser(LogAcquiredPublishTraverse):
@@ -41,3 +54,56 @@ class MinisiteImageTraverser(LogAcquiredImageTraverser):
             decorateRequest(request, config)
             checkPortlet(request, config)
         return result
+
+
+def get_acquired_base_object(minisite, name):
+    obj = minisite
+    while (not IPloneSiteRoot.providedBy(obj) and
+           not safe_hasattr(aq_base(obj), name)):
+        parent = aq_parent(aq_inner(obj))
+        if parent is None:
+            break
+        obj = parent
+    return obj
+
+
+@adapter(IPubAfterTraversal)
+def redirect(event):
+    request = event.request
+    parents = request['PARENTS']
+
+    minisite = get_minisite_object(request)
+    if not minisite:
+        return
+
+    minisite_index = parents.index(minisite)
+    first_child = parents[minisite_index - 1]
+
+    if not safe_hasattr(first_child, 'getId'):
+        return
+
+    first_name = first_child.getId()
+    if not first_name:
+        return
+
+    if safe_hasattr(aq_base(minisite), first_name):
+        # no acquisition used here, object is in minisite
+        logger.debug('No acquisition detected to {}'.format(first_name))
+        return
+
+    obj = queryMultiAdapter((minisite, request), name=first_name)
+    if obj and not IItem.providedBy(obj):
+        # it's a view
+        logger.debug('Found a view for {}'.format(first_name))
+        return
+
+    base_object = get_acquired_base_object(minisite, first_name)
+    redirect_base_url = url_in_portal_mode(base_object, request)
+    redirect_base_url = redirect_base_url.rstrip('/')
+
+    portal_url = api.portal.get().absolute_url()
+    portal_url = portal_url.rstrip('/')
+    redirect_url = request['URL'].replace(portal_url, redirect_base_url)
+
+    logger.info('Redirecting to {}'.format(redirect_url))
+    raise Redirect(redirect_url)
