@@ -4,6 +4,9 @@ Changelog
 0.5.6 (unreleased)
 ------------------
 
+- Remove IMinisiteRoot marker interface on uninstall.
+  [bsuttor]
+
 - 'sitemap.xml.gz' view is now callable from minisites.
   [bsuttor]
 
