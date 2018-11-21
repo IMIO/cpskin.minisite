@@ -69,13 +69,13 @@ def markMinisites(minisite_paths):
     for brain in brains:
         obj = brain.getObject()
         noLongerProvides(obj, IMinisiteRoot)
-        logger.info('{0} unmark as minisite'.format(obj.absolute_url()))
+        logger.debug('{0} unmark as minisite'.format(obj.absolute_url()))
 
     for minisite_path in minisite_paths:
         minisite_root = api.content.get(minisite_path)
         if minisite_root.portal_type != 'Link':
             alsoProvides(minisite_root, IMinisiteRoot)
-            logger.info('{0} folder mark as minisite'.format(minisite_path))
+            logger.debug('{0} folder mark as minisite'.format(minisite_path))
     commit()
 
 
