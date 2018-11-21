@@ -28,6 +28,7 @@
         directory="profiles/uninstall"
         description="Uninstalls the cpskin.minisite package"
         provides="Products.GenericSetup.interfaces.EXTENSION"
+        post_handler=".setuphandlers.uninstall"
         />
 
     <genericsetup:registerProfile
