@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.interfaces import IContentish
 from collective.redirectacquired.traverse import LogAcquiredImageTraverser
 from collective.redirectacquired.traverse import LogAcquiredPublishTraverse
 from cpskin.minisite import logger
@@ -8,6 +7,7 @@ from cpskin.minisite.minisite import decorateRequest
 from cpskin.minisite.portlet import checkPortlet
 from plone.rest.interfaces import IAPIRequest
 from plone.rest.traverse import RESTTraverse
+from Products.CMFCore.interfaces import IContentish
 from zope.component import queryUtility
 
 

@@ -1,19 +1,14 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_base, aq_parent, aq_inner
-from Products.Five.browser import BrowserView
-
+from cpskin.locales import CPSkinMessageFactory as _
+from cpskin.minisite.browser.interfaces import IHNavigationActivated
+from cpskin.minisite.browser.interfaces import IHNavigationActivationView
+from cpskin.minisite.utils import get_minisite_object
+from cpskin.minisite.utils import list_minisites
 from plone import api
-
+from Products.Five.browser import BrowserView
 from zope.interface import alsoProvides
 from zope.interface import implements
 from zope.interface import noLongerProvides
-
-from cpskin.locales import CPSkinMessageFactory as _
-from cpskin.minisite.browser.interfaces import (IHNavigationActivated,
-                                                IHNavigationActivationView
-                                                )
-from cpskin.minisite.minisite import Minisite
-from cpskin.minisite.utils import get_minisite_object, list_minisites
 
 
 class MSHorizontalNavigation(BrowserView):

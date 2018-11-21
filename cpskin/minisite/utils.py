@@ -1,5 +1,6 @@
-from plone import api
+# -*- coding: utf-8 -*-
 from cpskin.minisite.interfaces import IMinisiteConfig
+from plone import api
 from zope.component import getUtilitiesFor
 
 
@@ -14,7 +15,7 @@ def get_minisite_navigation_level(minisite_obj):
     portal = api.portal.get()
     portal_physical_path = portal.getPhysicalPath()
     minisite_physical_path = minisite_obj.getPhysicalPath()
-    minisite_path = [elem for elem in list(minisite_physical_path) if elem not in list(portal_physical_path)]
+    minisite_path = [elem for elem in list(minisite_physical_path) if elem not in list(portal_physical_path)]  # noqa
     return len(minisite_path)
 
 
