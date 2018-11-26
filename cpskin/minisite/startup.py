@@ -61,6 +61,8 @@ def markMinisites(minisite_paths):
     # we suppose plone is in first level of zope
     portal_path = filter(None, minisite_paths[0].split('/'))[0]
     plonesite = app.get(portal_path)
+    if not plonesite:
+        return
     setSite(plonesite)
     catalog = plonesite.portal_catalog
     brains = catalog({
