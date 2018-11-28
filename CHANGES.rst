@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5.6 (unreleased)
+1.0.0 (2018-11-28)
 ------------------
 
 - Add transform to change a href link on content-core and viewlet-below-content-body div.
