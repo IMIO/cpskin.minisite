@@ -4,7 +4,8 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Improve way to mark minisite on startup.
+  [bsuttor]
 
 
 1.0.0 (2018-11-28)

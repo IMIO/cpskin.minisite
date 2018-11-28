@@ -76,7 +76,7 @@ def markMinisites(minisite_paths):
 
     for minisite_path in minisite_paths:
         minisite_root = api.content.get(minisite_path)
-        if minisite_root.portal_type != 'Link':
+        if minisite_root and minisite_root.portal_type != 'Link':
             alsoProvides(minisite_root, IMinisiteRoot)
             logger.debug('{0} folder mark as minisite'.format(minisite_path))
     commit()
