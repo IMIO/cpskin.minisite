@@ -4,7 +4,6 @@ from zope.component import getUtilitiesFor
 from zope.component import getMultiAdapter
 from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationTabs
 from Products.CMFPlone.browser.navigation import CatalogNavigationTabs
 
@@ -15,6 +14,7 @@ from plone import api
 
 from cpskin.minisite.browser.interfaces import IHNavigationActivated
 from cpskin.minisite.utils import get_minisite_object
+from cpskin.minisite.utils import url_in_portal_mode
 from cpskin.minisite.minisite import Minisite
 from cpskin.minisite.interfaces import IMinisiteConfig
 HAS_MENU = False
@@ -29,17 +29,7 @@ class MinisiteViewlet(ViewletBase):
     index = ViewPageTemplateFile('minisite_in_minisite.pt')
 
     def url_in_portal_mode(self):
-        portal_url = getToolByName(self.context, 'portal_url')
-        relative_url = portal_url.getRelativeContentURL(self.context)
-        portal = portal_url.getPortalObject()
-        main_portal_url = self.request.cpskin_minisite.main_portal_url
-        minisite_url = self.request.cpskin_minisite.minisite_url
-        root_url = portal.absolute_url()
-        root_url_in_portal_mode = root_url.replace(
-            minisite_url,
-            main_portal_url
-        )
-        return '/'.join((root_url_in_portal_mode, relative_url))
+        return url_in_portal_mode(self.context, self.request)
 
 
 class SearchBoxViewlet(SearchBoxBase):

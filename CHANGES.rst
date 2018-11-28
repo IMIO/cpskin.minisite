@@ -7,12 +7,16 @@ Changelog
 - Add transform to change a href link on content-core and viewlet-below-content-body div.
   [bsuttor]
 
+- Redirect requests that use acquisition to access portal content from
+  minisites.
+  [laulaz]
+
 - Remove IMinisiteRoot marker interface on uninstall.
   [bsuttor]
 
 - 'sitemap.xml.gz' view is now callable from minisites.
   [bsuttor]
- 
+
 
 0.5.5 (2018-06-06)
 ------------------
