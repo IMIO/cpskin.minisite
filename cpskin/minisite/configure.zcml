@@ -149,4 +149,6 @@
        layer=".interfaces.IInMinisiteBase"
        />
 
+    <include package="plone.transformchain" />
+    <adapter factory=".transform.Minisite" name="cpskin.minisite" />
 </configure>

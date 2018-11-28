@@ -64,6 +64,7 @@ def markMinisites(minisite_paths):
     if not plonesite:
         return
     setSite(plonesite)
+    # plone.api do not work here
     catalog = plonesite.portal_catalog
     brains = catalog({
         'object_provides': IMinisiteRoot.__identifier__,
