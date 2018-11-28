@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.1 (unreleased)
+1.0.1 (2018-11-28)
 ------------------
 
 - Improve way to mark minisite on startup.
