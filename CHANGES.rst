@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.3 (unreleased)
+1.0.3 (2018-11-29)
 ------------------
 
 - Sometimes a tag has no href.
