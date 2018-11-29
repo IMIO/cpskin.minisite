@@ -75,7 +75,11 @@ def markMinisites(minisite_paths):
         logger.debug('{0} unmark as minisite'.format(obj.absolute_url()))
 
     for minisite_path in minisite_paths:
-        minisite_root = api.content.get(minisite_path)
+        try:
+            minisite_root = api.content.get(minisite_path)
+        except:  # noqa
+            # if folder path is not publish
+            minisite_root = None
         if minisite_root and minisite_root.portal_type != 'Link':
             alsoProvides(minisite_root, IMinisiteRoot)
             logger.debug('{0} folder mark as minisite'.format(minisite_path))

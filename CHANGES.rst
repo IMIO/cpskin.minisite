@@ -4,7 +4,8 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Also check if minisite path is published on starting.
+  [bsuttor]
 
 
 1.0.1 (2018-11-28)
