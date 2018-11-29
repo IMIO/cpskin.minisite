@@ -4,7 +4,8 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Sometimes a tag has no href.
+  [bsuttor]
 
 
 1.0.2 (2018-11-29)
