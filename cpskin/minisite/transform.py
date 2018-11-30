@@ -23,8 +23,11 @@ def change_a_href(soup, request, html_id='content-core'):
             if not minisite:
                 continue
             end_of_url = href.replace(minisite.minisite_url, '')
-            portal_href_url = '{0}{1}'.format(
-                minisite.search_path, end_of_url)
+            try:
+                portal_href_url = '{0}{1}'.format(
+                    minisite.search_path, end_of_url)
+            except UnicodeEncodeError:
+                continue
             href_obj = api.content.get(portal_href_url)
             if href_obj and IDexterityContent.providedBy(href_obj):
                 if not '/'.join(href_obj.getPhysicalPath()).startswith(
@@ -45,6 +48,7 @@ class Minisite(object):
         self.request = request
 
     def applyTransform(self):
+        # if not in minisite False
         site = getSite()
         if not site:
             return False

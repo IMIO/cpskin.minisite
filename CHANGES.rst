@@ -4,7 +4,8 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Check UnicodeEncodeError on transform url.
+  [bsuttor]
 
 
 1.0.4 (2018-11-30)
