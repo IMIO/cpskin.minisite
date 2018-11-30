@@ -17,19 +17,22 @@ def change_a_href(soup, request, html_id='content-core'):
         a_tags = id_tag.find_all('a')
         for tag in a_tags:
             href = tag.get('href')
-            if href:
-                minisite = request.get('cpskin_minisite', None)
-                end_of_url = href.replace(minisite.minisite_url, '')
-                portal_href_url = '{0}{1}'.format(
-                    minisite.search_path, end_of_url)
-                href_obj = api.content.get(portal_href_url)
-                if href_obj and IDexterityContent.providedBy(href_obj):
-                    if not '/'.join(href_obj.getPhysicalPath()).startswith(
-                            minisite.search_path):
-                        tag['href'] = href.replace(
-                            minisite.minisite_url,
-                            minisite.main_portal_url
-                        )
+            if not href:
+                continue
+            minisite = request.get('cpskin_minisite', None)
+            if not minisite:
+                continue
+            end_of_url = href.replace(minisite.minisite_url, '')
+            portal_href_url = '{0}{1}'.format(
+                minisite.search_path, end_of_url)
+            href_obj = api.content.get(portal_href_url)
+            if href_obj and IDexterityContent.providedBy(href_obj):
+                if not '/'.join(href_obj.getPhysicalPath()).startswith(
+                        minisite.search_path):
+                    tag['href'] = href.replace(
+                        minisite.minisite_url,
+                        minisite.main_portal_url
+                    )
 
 
 class Minisite(object):

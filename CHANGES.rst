@@ -4,7 +4,8 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Improve transform.
+  [bsuttor]
 
 
 1.0.3 (2018-11-29)
