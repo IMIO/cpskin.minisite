@@ -99,18 +99,18 @@ def redirect(event):
     if first_name in white_list_name \
             or first_name.startswith('++') \
             or first_name.endswith(white_list_end):
-        logger.info('Found a white list {0}'.format(first_name))
+        logger.debug('Found a white list {0}'.format(first_name))
         return
 
     if safe_hasattr(aq_base(minisite), first_name):
         # no acquisition used here, object is in minisite
-        logger.info('No acquisition detected to {0}'.format(first_name))
+        logger.debug('No acquisition detected to {0}'.format(first_name))
         return
 
     obj = queryMultiAdapter((minisite, request), name=first_name)
     if obj and not IItem.providedBy(obj):
         # it's a view
-        logger.info('Found a view for {0}'.format(first_name))
+        logger.debug('Found a view for {0}'.format(first_name))
         return
 
     base_object = get_acquired_base_object(minisite, first_name)
@@ -122,6 +122,6 @@ def redirect(event):
     redirect_url = request['URL'].replace(portal_url, redirect_base_url)
 
     logger.info('Redirecting to {0} {1}'.format(redirect_url, first_name))
-    # if redirect_url.endswith('index_html'):
-    #     import ipdb; ipdb.set_trace()
+    if redirect_url.endswith('/index_html'):
+        redirect_url = redirect_url.replace('/index_html', '')
     raise Redirect(redirect_url)

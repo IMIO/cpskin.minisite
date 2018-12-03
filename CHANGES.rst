@@ -4,6 +4,9 @@ Changelog
 1.0.6 (unreleased)
 ------------------
 
+- Remove /index_html from redirect urls.
+  [bsuttor]
+
 - Transform check if href is find.
   [bsuttor]
 
