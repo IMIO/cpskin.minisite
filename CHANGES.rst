@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.6 (unreleased)
+1.0.6 (2018-12-03)
 ------------------
 
 - Remove /index_html from redirect urls.
