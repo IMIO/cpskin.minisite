@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.transformchain.interfaces import ITransform
+from zExceptions import NotFound
 from zope.component import adapts
 from zope.component.hooks import getSite
 from zope.interface import implements
@@ -28,7 +29,10 @@ def change_a_href(soup, request, html_id='content-core'):
                     minisite.search_path, end_of_url)
             except UnicodeEncodeError:
                 continue
-            href_obj = api.content.get(portal_href_url)
+            try:
+                href_obj = api.content.get(portal_href_url)
+            except NotFound:
+                continue
             if href_obj and IDexterityContent.providedBy(href_obj):
                 if not '/'.join(href_obj.getPhysicalPath()).startswith(
                         minisite.search_path):

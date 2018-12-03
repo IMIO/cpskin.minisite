@@ -4,7 +4,8 @@ Changelog
 1.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Transform check if href is find.
+  [bsuttor]
 
 
 1.0.5 (2018-11-30)
