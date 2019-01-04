@@ -4,7 +4,8 @@ Changelog
 1.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not try to change Unauthorized url.
+  [bsuttor]
 
 
 1.0.6 (2018-12-03)

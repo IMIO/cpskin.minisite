@@ -4,6 +4,7 @@ from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.transformchain.interfaces import ITransform
 from zExceptions import NotFound
+from zExceptions import Unauthorized
 from zope.component import adapts
 from zope.component.hooks import getSite
 from zope.interface import implements
@@ -32,6 +33,8 @@ def change_a_href(soup, request, html_id='content-core'):
             try:
                 href_obj = api.content.get(portal_href_url)
             except NotFound:
+                continue
+            except Unauthorized:
                 continue
             if href_obj and IDexterityContent.providedBy(href_obj):
                 if not '/'.join(href_obj.getPhysicalPath()).startswith(
