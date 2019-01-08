@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.7 (unreleased)
+1.0.7 (2019-01-08)
 ------------------
 
 - Do not try to change Unauthorized url.
