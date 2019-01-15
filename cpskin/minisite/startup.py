@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from cpskin.minisite import logger
+from cpskin.minisite.event import MinisiteMarkedEvent
 from cpskin.minisite.interfaces import IMinisiteRoot
 from cpskin.minisite.minisite import MinisiteConfig
 from plone import api
 from transaction import commit
 from zope.component import provideUtility
 from zope.component.hooks import setSite
+from zope.event import notify
 from zope.interface import alsoProvides
 from zope.interface import noLongerProvides
 
@@ -82,6 +84,7 @@ def markMinisites(minisite_paths):
             minisite_root = None
         if minisite_root and minisite_root.portal_type != 'Link':
             alsoProvides(minisite_root, IMinisiteRoot)
+            notify(MinisiteMarkedEvent(minisite_root))
             logger.debug('{0} folder mark as minisite'.format(minisite_path))
     commit()
 

@@ -4,7 +4,8 @@ Changelog
 1.0.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add event notification when marking a minisite
+  [laulaz]
 
 
 1.0.7 (2019-01-08)
