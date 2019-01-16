@@ -17,12 +17,6 @@ from cpskin.minisite.utils import get_minisite_object
 from cpskin.minisite.utils import url_in_portal_mode
 from cpskin.minisite.minisite import Minisite
 from cpskin.minisite.interfaces import IMinisiteConfig
-HAS_MENU = False
-try:
-    from cpskin.menu.interfaces import IFourthLevelNavigation
-    HAS_MENU = True
-except ImportError:
-    pass
 
 
 class MinisiteViewlet(ViewletBase):
@@ -34,28 +28,6 @@ class MinisiteViewlet(ViewletBase):
 
 class SearchBoxViewlet(SearchBoxBase):
     index = ViewPageTemplateFile('searchbox_in_minisite.pt')
-
-
-def calculate_top_level(context):
-    """Calculate top level of navigation menu to take care of 4th level menu
-    NB : IFourthLevelNavigation is activated on the third level folder
-    """
-    portal = api.portal.get()
-    contextPhyPath = context.getPhysicalPath()
-    portalPhyPath = portal.getPhysicalPath()
-    path = [elem for elem in list(contextPhyPath) if elem not in list(portalPhyPath)]
-    depth = len(path)
-    if depth >= 3:
-        subLevels = depth - 3
-        if subLevels:
-            thirdLevelPath = '/'.join(contextPhyPath[:-subLevels])
-        else:
-            thirdLevelPath = '/'.join(contextPhyPath)
-        thirdLevelFolder = portal.unrestrictedTraverse(thirdLevelPath)
-        if HAS_MENU:
-            if IFourthLevelNavigation.providedBy(thirdLevelFolder):
-                return 4
-    return depth
 
 
 class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):

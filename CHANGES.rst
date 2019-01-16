@@ -4,6 +4,9 @@ Changelog
 1.0.8 (unreleased)
 ------------------
 
+- Code cleanup
+  [laulaz]
+
 - Add event notification when marking a minisite
   [laulaz]
 
