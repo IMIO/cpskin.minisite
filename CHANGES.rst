@@ -4,6 +4,10 @@ Changelog
 1.0.8 (unreleased)
 ------------------
 
+- Add new viewlet menu for dropdown : WEBOTT-9
+  The viewlet is hidden for now
+  [laulaz]
+
 - Code cleanup
   [laulaz]
 

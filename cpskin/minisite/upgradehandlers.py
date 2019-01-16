@@ -2,7 +2,7 @@
 PROFILE_ID = 'profile-cpskin.minisite:default'
 
 
-def add_actions_viewlet(context):
+def upgrade_viewlets(context):
     context.runImportStepFromProfile(PROFILE_ID, 'viewlets')
 
 

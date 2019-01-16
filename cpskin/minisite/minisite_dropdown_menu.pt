@@ -1,0 +1,17 @@
+<div class="minisite-dropdown-menu-container"
+     i18n:domain="plone">
+
+    <div class="minisite-dropdown-menu">
+
+        <a href="#" class="minisite-dropdown-menu-mobile"
+           tal:content="view/minisite_root/Title"></a>
+
+        <ul class="navTree navTreeLevel0">
+            <li tal:replace="structure view/createNavTree">
+                SUBTREE
+            </li>
+        </ul>
+
+    </div>
+
+</div>

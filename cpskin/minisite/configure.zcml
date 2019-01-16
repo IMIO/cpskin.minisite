@@ -60,9 +60,18 @@
     <genericsetup:upgradeStep
         title="cpskin.minisite: add actions viewlet"
         description="Upgrade step for adding the actions viewlet"
-        handler=".upgradehandlers.add_actions_viewlet"
+        handler=".upgradehandlers.upgrade_viewlets"
         source="0003"
         destination="0004"
+        profile="cpskin.minisite:default"
+        />
+
+    <genericsetup:upgradeStep
+        title="cpskin.minisite: add dropdown menu viewlet"
+        description="Upgrade step for adding the (hidden) dropdown menu viewlet"
+        handler=".upgradehandlers.upgrade_viewlets"
+        source="0004"
+        destination="0005"
         profile="cpskin.minisite:default"
         />
 
@@ -140,6 +149,14 @@
          name="cpskin.minisitemenu"
          manager="plone.app.layout.viewlets.interfaces.IPortalTop"
          class=".viewlet.MinisiteViewletMenu"
+         permission="zope2.View"
+         layer=".interfaces.IInMinisiteBase"
+         />
+
+    <browser:viewlet
+         name="cpskin.minisitedropdownmenu"
+         manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+         class=".viewlet.MinisiteViewletDropdownMenu"
          permission="zope2.View"
          layer=".interfaces.IInMinisiteBase"
          />

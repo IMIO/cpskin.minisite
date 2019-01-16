@@ -1,16 +1,18 @@
-from zope.interface import implements
-from zope.component import getUtilitiesFor
-
-from zope.component import getMultiAdapter
 from Acquisition import aq_inner
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFPlone.browser.interfaces import INavigationTabs
+from Products.CMFPlone.browser.interfaces import INavigationTree
 from Products.CMFPlone.browser.navigation import CatalogNavigationTabs
-
-from plone.app.layout.viewlets.common import ViewletBase
+from Products.CMFPlone.browser.navtree import NavtreeQueryBuilder
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone import api
+from plone.app.layout.navigation.interfaces import INavtreeStrategy
+from plone.app.layout.navigation.navtree import buildFolderTree
 from plone.app.layout.viewlets.common import GlobalSectionsViewlet
 from plone.app.layout.viewlets.common import SearchBoxViewlet as SearchBoxBase
-from plone import api
+from plone.app.layout.viewlets.common import ViewletBase
+from zope.component import getMultiAdapter
+from zope.component import getUtilitiesFor
+from zope.interface import implements
 
 from cpskin.minisite.browser.interfaces import IHNavigationActivated
 from cpskin.minisite.utils import get_minisite_object
@@ -105,3 +107,42 @@ class MinisiteViewletMenu(GlobalSectionsViewlet):
             sort_on='getObjPositionInParent',
         )
         return actions
+
+
+class MinisiteViewletDropdownMenu(ViewletBase):
+    implements(INavigationTree)
+    index = ViewPageTemplateFile('minisite_dropdown_menu.pt')
+    recurse = ViewPageTemplateFile('minisite_dropdown_menu_recurse.pt')
+
+    def update(self):
+        self.minisite_root = get_minisite_object(self.request)
+        self.root_path = '/'.join(self.minisite_root.getPhysicalPath())
+
+    def navigationTreeRootPath(self):
+        return self.root_path
+
+    def createNavTree(self):
+        data = self.getNavTree()
+        return self.recurse(
+            children=data.get('children', []),
+            level=1,
+            bottomLevel=3,
+        )
+
+    def getNavTree(self):
+        context = aq_inner(self.context)
+
+        queryBuilder = NavtreeQueryBuilder(context)
+        query = queryBuilder()
+        query['path']['query'] = self.root_path
+        query['path']['depth'] = 3
+        query['review_state'] = ('published_and_shown',)
+
+        strategy = getMultiAdapter((context, self), INavtreeStrategy)
+
+        return buildFolderTree(
+            context,
+            obj=context,
+            query=query,
+            strategy=strategy,
+        )
