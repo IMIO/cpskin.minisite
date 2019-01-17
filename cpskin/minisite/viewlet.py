@@ -142,6 +142,7 @@ class MinisiteViewletDropdownMenu(ViewletBase):
         query['review_state'] = ('published_and_shown',)
 
         strategy = getMultiAdapter((context, self), INavtreeStrategy)
+        strategy.showAllParents = False
 
         return buildFolderTree(
             context,
