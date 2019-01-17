@@ -32,6 +32,20 @@ class SearchBoxViewlet(SearchBoxBase):
     index = ViewPageTemplateFile('searchbox_in_minisite.pt')
 
 
+def actions(request):
+    minisite = request.get('cpskin_minisite', None)
+    if not isinstance(minisite, Minisite):
+        return []
+    portal = api.portal.get()
+    minisiteRoot = portal.unrestrictedTraverse(minisite.search_path)
+    actions = api.content.find(
+        context=minisiteRoot,
+        hiddenTags='minisite-action',
+        sort_on='getObjPositionInParent',
+    )
+    return actions
+
+
 class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):
     implements(INavigationTabs)
 
@@ -88,25 +102,13 @@ class MinisiteViewletMenu(GlobalSectionsViewlet):
 
         self.selected_portal_tab = self.selected_tabs['portal']
         self.minisite_root = get_minisite_object(self.request)
+        self.actions = actions(self.request)
 
     def minisite_menu(self):
         if IHNavigationActivated.providedBy(self.minisite_root):
             return True
         else:
             return False
-
-    def actions(self):
-        minisite = self.request.get('cpskin_minisite', None)
-        if not isinstance(minisite, Minisite):
-            return []
-        portal = api.portal.get()
-        minisiteRoot = portal.unrestrictedTraverse(minisite.search_path)
-        actions = api.content.find(
-            context=minisiteRoot,
-            hiddenTags='minisite-action',
-            sort_on='getObjPositionInParent',
-        )
-        return actions
 
 
 class MinisiteViewletDropdownMenu(ViewletBase):
@@ -117,6 +119,7 @@ class MinisiteViewletDropdownMenu(ViewletBase):
     def update(self):
         self.minisite_root = get_minisite_object(self.request)
         self.root_path = '/'.join(self.minisite_root.getPhysicalPath())
+        self.actions = actions(self.request)
 
     def navigationTreeRootPath(self):
         return self.root_path

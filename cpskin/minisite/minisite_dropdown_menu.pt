@@ -1,6 +1,19 @@
 <div class="minisite-dropdown-menu-container"
      i18n:domain="plone">
 
+    <div id="minisite-actions"
+         tal:define="actions view/actions"
+         tal:condition="actions">
+         <ul>
+             <li tal:repeat="action actions">
+                 <a href=""
+                    tal:content="action/Title"
+                    tal:attributes="href action/getURL;
+                                    title action/description|nothing"></a>
+             </li>
+         </ul>
+    </div>
+
     <div class="minisite-dropdown-menu">
 
         <a href="#" class="minisite-dropdown-menu-mobile"
