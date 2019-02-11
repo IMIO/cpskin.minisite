@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.8 (unreleased)
+1.0.8 (2019-02-11)
 ------------------
 
 - Add new viewlet menu for dropdown : WEBOTT-9
