@@ -4,7 +4,8 @@ Changelog
 1.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove collective.redirectacquired as it is no longer needed
+  [laulaz]
 
 
 1.0.8 (2019-02-11)
