@@ -2,29 +2,29 @@
 from Acquisition import aq_base
 from Acquisition import aq_inner
 from Acquisition import aq_parent
-from collective.redirectacquired.traverse import LogAcquiredImageTraverser
-from collective.redirectacquired.traverse import LogAcquiredPublishTraverse
+from OFS.interfaces import IItem
+from Products.CMFCore.interfaces import IContentish
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_hasattr
+from ZPublisher.BaseRequest import DefaultPublishTraverse
+from ZPublisher.interfaces import IPubAfterTraversal
 from cpskin.minisite import logger
 from cpskin.minisite.interfaces import IMinisiteConfig
 from cpskin.minisite.minisite import decorateRequest
 from cpskin.minisite.portlet import checkPortlet
 from cpskin.minisite.utils import get_minisite_object
 from cpskin.minisite.utils import url_in_portal_mode
-from OFS.interfaces import IItem
 from plone import api
+from plone.app.imaging.traverse import ImageTraverser
 from plone.rest.interfaces import IAPIRequest
 from plone.rest.traverse import RESTTraverse
-from Products.CMFCore.interfaces import IContentish
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.CMFPlone.utils import safe_hasattr
 from zExceptions import Redirect
 from zope.component import adapter
 from zope.component import queryMultiAdapter
 from zope.component import queryUtility
-from ZPublisher.interfaces import IPubAfterTraversal
 
 
-class MinisiteTraverser(LogAcquiredPublishTraverse):
+class MinisiteTraverser(DefaultPublishTraverse):
 
     def publishTraverse(self, request, name):
         if IAPIRequest.providedBy(request):
@@ -42,7 +42,7 @@ class MinisiteTraverser(LogAcquiredPublishTraverse):
         return result
 
 
-class MinisiteImageTraverser(LogAcquiredImageTraverser):
+class MinisiteImageTraverser(ImageTraverser):
 
     def publishTraverse(self, request, name):
         result = super(MinisiteImageTraverser, self).publishTraverse(

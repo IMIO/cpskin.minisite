@@ -48,7 +48,6 @@ setup(
         'cpskin.core',
         'cpskin.locales',
         'plone.rest',
-        'collective.redirectacquired',
     ],
     extras_require={
         'test': [
