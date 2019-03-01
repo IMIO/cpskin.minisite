@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.9 (unreleased)
+1.0.9 (2019-03-01)
 ------------------
 
 - Remove collective.redirectacquired as it is no longer needed
