@@ -9,17 +9,30 @@ from zope.component.hooks import getSite
 from zope.interface import Interface
 from zope.interface import implements
 
+IDS_WITH_HREF = [
+    'content-core',
+    'viewlet-below-content-body',
+]
 
-def change_a_href(soup, request, html_id='content'):
+CLASSES_WITH_HREF = [
+    'parsable-content',
+]
+
+
+def change_a_href(soup, request, html_ids=[], html_classes=[]):
     """
     """
     minisite = request.get('cpskin_minisite', None)
     if not minisite:
         return
     minisite_obj = get_minisite_object(request)
-    id_tag = soup.find(id=html_id)
-    if id_tag:
-        a_tags = id_tag.find_all('a')
+    tags = [soup.find(id=html_id) for html_id in html_ids]
+    for cl in html_classes:
+        tags.extend(soup.find_all(class_=cl))
+    for tag in tags:
+        if tag is None:
+            continue
+        a_tags = tag.find_all('a')
         for tag in a_tags:
             href = tag.get('href')
             if not href:
@@ -58,14 +71,14 @@ class Minisite(object):
         if not self.applyTransform():
             return result
         soup = BeautifulSoup(result, 'lxml')
-        change_a_href(soup, self.request)
+        change_a_href(soup, self.request, IDS_WITH_HREF, CLASSES_WITH_HREF)
         return str(soup)
 
     def transformUnicode(self, result, encoding):
         if not self.applyTransform():
             return result
         soup = BeautifulSoup(result, 'lxml')
-        change_a_href(soup, self.request)
+        change_a_href(soup, self.request, IDS_WITH_HREF, CLASSES_WITH_HREF)
         return str(soup)
 
     def transformIterable(self, result, encoding):
@@ -74,7 +87,7 @@ class Minisite(object):
         transformed = []
         for r in result:
             soup = BeautifulSoup(r, 'lxml')
-            change_a_href(soup, self.request)
+            change_a_href(soup, self.request, IDS_WITH_HREF, CLASSES_WITH_HREF)
             transformed.append(str(soup))
 
         return transformed

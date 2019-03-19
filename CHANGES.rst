@@ -7,7 +7,8 @@ Changelog
 - Fix / improve herited content href transformation and redirection (WEBNAM-209)
   - herited content will be found event in the parents of a content with same id
   - language is now properly handled
-  - href transformation works now also on special pages (ex: indexview)
+  - href transformation works now also on specific areas outside of content-core
+    and viewlet-below-content-body : just use 'parsable-content' class
   - optimizations have been made
   [laulaz]
 
