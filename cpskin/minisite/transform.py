@@ -3,15 +3,11 @@ from bs4 import BeautifulSoup
 from cpskin.minisite.utils import get_acquired_base_object
 from cpskin.minisite.utils import get_minisite_object
 from cpskin.minisite.utils import url_in_portal_mode
-from plone import api
-from plone.dexterity.interfaces import IDexterityContent
 from plone.transformchain.interfaces import ITransform
-from zExceptions import NotFound
-from zExceptions import Unauthorized
 from zope.component import adapts
 from zope.component.hooks import getSite
-from zope.interface import implements
 from zope.interface import Interface
+from zope.interface import implements
 
 
 def change_a_href(soup, request, html_id='content'):
