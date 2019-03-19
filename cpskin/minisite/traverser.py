@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
-from Acquisition import aq_inner
-from Acquisition import aq_parent
 from OFS.interfaces import IItem
 from Products.CMFCore.interfaces import IContentish
-from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_hasattr
 from ZPublisher.BaseRequest import DefaultPublishTraverse
 from ZPublisher.interfaces import IPubAfterTraversal
@@ -12,9 +9,9 @@ from cpskin.minisite import logger
 from cpskin.minisite.interfaces import IMinisiteConfig
 from cpskin.minisite.minisite import decorateRequest
 from cpskin.minisite.portlet import checkPortlet
+from cpskin.minisite.utils import get_acquired_base_object
 from cpskin.minisite.utils import get_minisite_object
 from cpskin.minisite.utils import url_in_portal_mode
-from plone import api
 from plone.app.imaging.traverse import ImageTraverser
 from plone.rest.interfaces import IAPIRequest
 from plone.rest.traverse import RESTTraverse
@@ -56,17 +53,6 @@ class MinisiteImageTraverser(ImageTraverser):
         return result
 
 
-def get_acquired_base_object(minisite, name):
-    obj = minisite
-    while (not IPloneSiteRoot.providedBy(obj) and
-           not safe_hasattr(aq_base(obj), name)):
-        parent = aq_parent(aq_inner(obj))
-        if parent is None:
-            break
-        obj = parent
-    return obj
-
-
 @adapter(IPubAfterTraversal)
 def redirect(event):
     white_list_name = [
@@ -83,11 +69,11 @@ def redirect(event):
     request = event.request
     parents = request['PARENTS']
 
-    minisite = get_minisite_object(request)
-    if not minisite:
+    minisite_obj = get_minisite_object(request)
+    if not minisite_obj:
         return
 
-    minisite_index = parents.index(minisite)
+    minisite_index = parents.index(minisite_obj)
     first_child = parents[minisite_index - 1]
     if not safe_hasattr(first_child, 'getId'):
         return
@@ -102,24 +88,22 @@ def redirect(event):
         logger.debug('Found a white list {0}'.format(first_name))
         return
 
-    if safe_hasattr(aq_base(minisite), first_name):
+    if safe_hasattr(aq_base(minisite_obj), first_name):
         # no acquisition used here, object is in minisite
         logger.debug('No acquisition detected to {0}'.format(first_name))
         return
 
-    obj = queryMultiAdapter((minisite, request), name=first_name)
+    obj = queryMultiAdapter((minisite_obj, request), name=first_name)
     if obj and not IItem.providedBy(obj):
         # it's a view
         logger.debug('Found a view for {0}'.format(first_name))
         return
 
-    base_object = get_acquired_base_object(minisite, first_name)
+    end_of_url = request['URL'].replace(minisite_obj.absolute_url(), '')
+    base_object = get_acquired_base_object(minisite_obj, end_of_url)
     redirect_base_url = url_in_portal_mode(base_object, request)
     redirect_base_url = redirect_base_url.rstrip('/')
-
-    portal_url = api.portal.get().absolute_url()
-    portal_url = portal_url.rstrip('/')
-    redirect_url = request['URL'].replace(portal_url, redirect_base_url)
+    redirect_url = '{0}{1}'.format(redirect_base_url, end_of_url)
 
     logger.info('Redirecting to {0} {1}'.format(redirect_url, first_name))
     if redirect_url.endswith('/index_html'):
