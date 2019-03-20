@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
-from cpskin.minisite.interfaces import IMinisiteConfig
+from Acquisition import aq_base
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_hasattr
+from cpskin.minisite.interfaces import IMinisiteConfig
 from plone import api
+from zExceptions import NotFound
+from zExceptions import Unauthorized
 from zope.component import getUtilitiesFor
 
 
@@ -42,3 +49,34 @@ def url_in_portal_mode(context, request):
         main_portal_url
     )
     return '/'.join((root_url_in_portal_mode, relative_url))
+
+
+def get_acquired_base_object(minisite_obj, path):
+    obj = minisite_obj
+    path = path.split('@@')[0]
+    contents = path.strip('/').split('/')
+    parent_id = contents[0]
+    child_id = len(contents) > 1 and contents[1] or None
+    while not IPloneSiteRoot.providedBy(obj):
+        parent = aq_parent(aq_inner(obj))
+        if parent is None:
+            break
+        obj = parent
+        if safe_hasattr(aq_base(obj), parent_id):
+            if not child_id:
+                return obj
+            container = getattr(aq_base(obj), parent_id)
+            if safe_hasattr(container, child_id):
+                try:
+                    obj_url = '/'.join(obj.getPhysicalPath())
+                    full_url = "{0}{1}".format(
+                        obj_url,
+                        path,
+                    )
+                    api.content.get(full_url)
+                except Unauthorized:
+                    continue
+                except NotFound:
+                    continue
+                else:
+                    return obj
