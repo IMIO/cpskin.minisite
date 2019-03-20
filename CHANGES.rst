@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0.10 (unreleased)
--------------------
+1.1.0 (2019-03-20)
+------------------
 
 - Fix / improve herited content href transformation and redirection (WEBNAM-209)
   - herited content will be found event in the parents of a content with same id
