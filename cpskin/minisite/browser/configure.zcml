@@ -52,4 +52,14 @@
         layer="..interfaces.IThemeSpecific"
         />
 
+    <browser:page
+        for="*"
+        name="breadcrumbs_view"
+        class=".navigation.MinisiteNavigationBreadcrumbs"
+        permission="zope.Public"
+        allowed_attributes="breadcrumbs"
+        layer="..interfaces.IInMinisite"
+        />
+
+
 </configure>

@@ -2,11 +2,11 @@
 from Acquisition import aq_base
 from Acquisition import aq_inner
 from Acquisition import aq_parent
+from cpskin.minisite.interfaces import IMinisiteConfig
+from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_hasattr
-from cpskin.minisite.interfaces import IMinisiteConfig
-from plone import api
 from zExceptions import NotFound
 from zExceptions import Unauthorized
 from zope.component import getUtilitiesFor
@@ -17,6 +17,13 @@ def get_minisite_object(request):
     if not minisite:
         return None
     return api.content.get(minisite.search_path)
+
+
+def get_minisite_path(request):
+    minisite = request.get('cpskin_minisite', None)
+    if not minisite:
+        return None
+    return minisite.search_path
 
 
 def get_minisite_navigation_level(minisite_obj):

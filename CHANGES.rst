@@ -4,7 +4,8 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Breathcrumb in minisite mode has no more link to portal.
+  [bsuttor]
 
 
 1.1.0 (2019-03-20)
