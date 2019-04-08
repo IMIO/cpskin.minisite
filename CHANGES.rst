@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.1 (unreleased)
+1.1.1 (2019-04-08)
 ------------------
 
 - Breathcrumb in minisite mode has no more link to portal.
