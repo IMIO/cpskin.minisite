@@ -1,4 +1,5 @@
-<div class="minisite-dropdown-menu-container"
+<div id="container-minisite-dropdown-globalnav"
+     class="minisite-dropdown-menu-container"
      i18n:domain="plone">
 
     <div id="minisite-actions"

@@ -4,7 +4,8 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add id to fix Diazo rules in several themes : WEB-2976
+  [laulaz]
 
 
 1.1.1 (2019-04-08)
