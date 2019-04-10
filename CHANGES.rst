@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.2 (unreleased)
+1.1.2 (2019-04-10)
 ------------------
 
 - Add id to fix Diazo rules in several themes : WEB-2976
