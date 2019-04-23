@@ -4,7 +4,8 @@ Changelog
 1.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Open links to portal in new window : WEB-3013
+  [laulaz]
 
 
 1.1.2 (2019-04-10)

@@ -44,6 +44,7 @@ def change_a_href(soup, request, html_ids=[], html_classes=[]):
             container_url = url_in_portal_mode(container, request)
             container_url = container_url.rstrip('/')
             tag['href'] = '{0}{1}'.format(container_url, end_of_url)
+            tag['target'] = '_blank'
 
 
 class Minisite(object):
