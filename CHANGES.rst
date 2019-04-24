@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.3 (unreleased)
+1.1.3 (2019-04-24)
 ------------------
 
 - Open links to portal in new window : WEB-3013
