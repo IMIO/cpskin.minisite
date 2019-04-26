@@ -27,3 +27,5 @@ share/
 pip-selfcheck.json
 geckodriver.log
 local/
+.coverage
+htmlcov/
