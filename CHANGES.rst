@@ -4,7 +4,8 @@ Changelog
 1.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Tag minisite folders only on instance1 to avoid conflict error.
+  [bsuttor]
 
 
 1.1.3 (2019-04-24)
