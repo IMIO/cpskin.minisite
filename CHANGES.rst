@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.4 (unreleased)
+1.1.4 (2019-07-09)
 ------------------
 
 - Tag minisite folders only on instance1 to avoid conflict error.
