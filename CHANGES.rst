@@ -4,7 +4,8 @@ Changelog
 1.1.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Avoid error when there is no HOSTNAME env variable
+  [laulaz]
 
 
 1.1.4 (2019-07-09)

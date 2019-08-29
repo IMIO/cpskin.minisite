@@ -78,7 +78,7 @@ def markMinisites(minisite_paths):
     for minisite_path in minisite_paths:
         try:
             minisite_root = api.content.get(minisite_path)
-            docker_compose_hostname = os.environ.get("HOSTNAME")
+            docker_compose_hostname = os.environ.get("HOSTNAME") or ""
         except:  # noqa
             # if folder path is not publish
             minisite_root = None
