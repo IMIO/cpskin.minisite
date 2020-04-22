@@ -4,6 +4,9 @@ Changelog
 1.1.5 (unreleased)
 ------------------
 
+- Add more improvements for i18n support
+  [macagua]
+
 - Avoid error when there is no HOSTNAME env variable
   [laulaz]
 

@@ -12,8 +12,10 @@
 
     <link rel="alternate" title="RSS 1.0" type="application/rss+xml"
           tal:condition="request/SearchableText|nothing"
-          tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}"/>
-    <link rel="home" title="Home" tal:attributes="href here_url" />
+          tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}"
+          i18n:attributes="title" />
+    <link rel="home" title="Home" tal:attributes="href here_url"
+          i18n:attributes="title" />
 
   </metal:block>
 
@@ -82,7 +84,7 @@
                 <p id="rss-subscription" i18n:domain="plone"
                    tal:define="syndication context/@@tools/syndication|nothing"
                    tal:condition="syndication/isSiteSyndicationAllowed|nothing">
-                      <img src="" alt="RSS"
+                      <img src="" alt="RSS" i18n:attributes="alt"
                            tal:attributes="src string:${portal_url}/rss.gif"/>
                     <a href=""
                        class="link-feed"
