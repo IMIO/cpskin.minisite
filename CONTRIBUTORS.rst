@@ -2,3 +2,4 @@
 - Laurent Lasudry [Affinitic]
 - Benoît Suttor [IMIO]
 - Christophe Boulanger [IMIO]
+- Leonardo J. Caballero G. [Plone Venezuela]
