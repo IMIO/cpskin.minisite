@@ -37,6 +37,9 @@ def change_a_href(soup, request, html_ids=[], html_classes=[]):
             href = tag.get('href')
             if not href:
                 continue
+            if minisite.minisite_url not in href:
+                # external url
+                continue
             end_of_url = href.replace(minisite.minisite_url, '')
             container = get_acquired_base_object(minisite_obj, end_of_url)
             if container is None:

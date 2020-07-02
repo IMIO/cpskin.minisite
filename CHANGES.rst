@@ -4,6 +4,9 @@ Changelog
 1.1.5 (unreleased)
 ------------------
 
+- Fix problem with external url transformation : WEB-3375
+  [laulaz]
+
 - Add more improvements for i18n support
   [macagua]
 
