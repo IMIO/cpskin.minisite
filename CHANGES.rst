@@ -4,7 +4,8 @@ Changelog
 1.1.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix bug when rss_feed_view is apply in minisite context.
+  [boulch]
 
 
 1.1.5 (2020-07-02)

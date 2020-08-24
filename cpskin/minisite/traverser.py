@@ -98,9 +98,18 @@ def redirect(event):
         # it's a view
         logger.debug('Found a view for {0}'.format(first_name))
         return
-
     end_of_url = request['URL'].replace(minisite_obj.absolute_url(), '')
-    base_object = get_acquired_base_object(minisite_obj, end_of_url)
+    # sample : '/agenda/rss_feed_view'
+    base_object = None
+    if "/" in end_of_url:
+        ends = end_of_url.split("/")
+        ends.reverse()
+        for end in ends:
+            base_object = get_acquired_base_object(minisite_obj, end)
+            if base_object is not None:
+                break
+    else:
+        base_object = get_acquired_base_object(minisite_obj, end_of_url)
     redirect_base_url = url_in_portal_mode(base_object, request)
     redirect_base_url = redirect_base_url.rstrip('/')
     redirect_url = '{0}{1}'.format(redirect_base_url, end_of_url)
