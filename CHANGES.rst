@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.6 (unreleased)
+1.1.6 (2020-08-24)
 ------------------
 
 - Fix bug when rss_feed_view is apply in minisite context.
