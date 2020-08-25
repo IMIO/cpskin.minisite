@@ -4,7 +4,8 @@ Changelog
 1.1.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Begin to fix tests, but I have to comment all of tests. I think there is an issue during initialisation of minisite.
+  [bsuttor]
 
 
 1.1.6 (2020-08-24)
