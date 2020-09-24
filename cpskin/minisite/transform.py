@@ -9,18 +9,19 @@ from zope.component.hooks import getSite
 from zope.interface import Interface
 from zope.interface import implements
 
-IDS_WITH_HREF = [
+IDS_WITH_URLS = [
     'content-core',
     'viewlet-below-content-body',
 ]
 
-CLASSES_WITH_HREF = [
+CLASSES_WITH_URLS = [
     'parsable-content',
 ]
 
 
-def change_a_href(soup, request, html_ids=[], html_classes=[]):
+def change_urls(soup, request, html_ids=[], html_classes=[]):
     """
+    Change a href and img src urls from minisites to portal urls
     """
     minisite = request.get('cpskin_minisite', None)
     if not minisite:
@@ -33,8 +34,8 @@ def change_a_href(soup, request, html_ids=[], html_classes=[]):
         if tag is None:
             continue
         a_tags = tag.find_all('a')
-        for tag in a_tags:
-            href = tag.get('href')
+        for a_tag in a_tags:
+            href = a_tag.get('href')
             if not href:
                 continue
             if minisite.minisite_url not in href:
@@ -46,8 +47,23 @@ def change_a_href(soup, request, html_ids=[], html_classes=[]):
                 continue
             container_url = url_in_portal_mode(container, request)
             container_url = container_url.rstrip('/')
-            tag['href'] = '{0}{1}'.format(container_url, end_of_url)
-            tag['target'] = '_blank'
+            a_tag['href'] = '{0}{1}'.format(container_url, end_of_url)
+            a_tag['target'] = '_blank'
+        img_tags = tag.find_all('img')
+        for img_tag in img_tags:
+            src = img_tag.get('src')
+            if not src:
+                continue
+            if minisite.minisite_url not in src:
+                # external url
+                continue
+            end_of_url = src.replace(minisite.minisite_url, '')
+            container = get_acquired_base_object(minisite_obj, end_of_url)
+            if container is None:
+                continue
+            container_url = url_in_portal_mode(container, request)
+            container_url = container_url.rstrip('/')
+            img_tag['src'] = '{0}{1}'.format(container_url, end_of_url)
 
 
 class Minisite(object):
@@ -75,14 +91,14 @@ class Minisite(object):
         if not self.applyTransform():
             return result
         soup = BeautifulSoup(result, 'lxml')
-        change_a_href(soup, self.request, IDS_WITH_HREF, CLASSES_WITH_HREF)
+        change_urls(soup, self.request, IDS_WITH_URLS, CLASSES_WITH_URLS)
         return str(soup)
 
     def transformUnicode(self, result, encoding):
         if not self.applyTransform():
             return result
         soup = BeautifulSoup(result, 'lxml')
-        change_a_href(soup, self.request, IDS_WITH_HREF, CLASSES_WITH_HREF)
+        change_urls(soup, self.request, IDS_WITH_URLS, CLASSES_WITH_URLS)
         return str(soup)
 
     def transformIterable(self, result, encoding):
@@ -91,7 +107,7 @@ class Minisite(object):
         transformed = []
         for r in result:
             soup = BeautifulSoup(r, 'lxml')
-            change_a_href(soup, self.request, IDS_WITH_HREF, CLASSES_WITH_HREF)
+            change_urls(soup, self.request, IDS_WITH_URLS, CLASSES_WITH_URLS)
             transformed.append(str(soup))
 
         return transformed
