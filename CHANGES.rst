@@ -4,6 +4,9 @@ Changelog
 1.1.7 (unreleased)
 ------------------
 
+- WEB-3436: Also transform img src for content coming from portal
+  [laulaz]
+
 - Begin to fix tests, but I have to comment all of tests. I think there is an issue during initialisation of minisite.
   [bsuttor]
 
