@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.7 (unreleased)
+1.1.7 (2020-09-25)
 ------------------
 
 - WEB-3436: Also transform img src for content coming from portal
