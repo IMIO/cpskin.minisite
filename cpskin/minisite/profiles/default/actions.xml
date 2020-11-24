@@ -24,5 +24,27 @@
             </property>
             <property name="visible">True</property>
         </object>
+        <object name="enable_dropdown" meta_type="CMF Action" i18n:domain="cpskin">
+            <property name="title" i18n:translate="">Show minisite dropdown menu</property>
+            <property name="description"></property>
+            <property name="url_expr">string:${context/absolute_url}/@@ms_dropdown_menu_enable</property>
+            <property name="link_target"></property>
+            <property name="available_expr">context/@@ms_dropdown_menu/can_enable_dropdown</property>
+            <property name="permissions">
+                <element value="Manage portal"/>
+            </property>
+            <property name="visible">True</property>
+        </object>
+        <object name="disable_dropdown" meta_type="CMF Action" i18n:domain="cpskin">
+            <property name="title" i18n:translate="">Hide minisite dropdown menu</property>
+            <property name="description"></property>
+            <property name="url_expr">string:${context/absolute_url}/@@ms_dropdown_menu_disable</property>
+            <property name="link_target"></property>
+            <property name="available_expr">context/@@ms_dropdown_menu/can_disable_dropdown</property>
+            <property name="permissions">
+                <element value="Manage portal"/>
+            </property>
+            <property name="visible">True</property>
+        </object>
     </object>
 </object>

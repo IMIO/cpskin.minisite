@@ -33,6 +33,30 @@
         layer="..interfaces.IThemeSpecific"
         />
 
+    <browser:page
+        for="*"
+        name="ms_dropdown_menu"
+        class=".hnavigation.MSDropdDownMenu"
+        permission="zope.Public"
+        allowed_interface=".interfaces.IDropDownMenuActivationView"
+        layer="..interfaces.IThemeSpecific"
+        />
+
+    <browser:page
+        for="*"
+        name="ms_dropdown_menu_enable"
+        class=".hnavigation.MSDropdDownMenuEnable"
+        permission="zope.Public"
+        layer="..interfaces.IThemeSpecific"
+        />
+
+    <browser:page
+        for="*"
+        name="ms_dropdown_menu_disable"
+        class=".hnavigation.MSDropdDownMenuDisable"
+        permission="zope.Public"
+        layer="..interfaces.IThemeSpecific"
+        />
 
     <include package="plone.app.users"/>
 

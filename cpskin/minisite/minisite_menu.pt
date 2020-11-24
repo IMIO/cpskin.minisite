@@ -1,7 +1,6 @@
 <tal:sections tal:define="portal_tabs view/portal_tabs;
-                          minisite_menu view/minisite_menu;
                           actions view/actions"
-     tal:condition="python: minisite_menu or actions"
+     tal:condition="view/available"
      i18n:domain="plone">
     <p class="hiddenStructure" i18n:translate="heading_sections">Navigation</p>
     <div id="container-minisite-globalnav">
@@ -19,8 +18,7 @@
     </div>
 
     <ul id="minisite-globalnav"
-        tal:define="selected_tab python:view.selected_portal_tab"
-        tal:condition="minisite_menu">
+        tal:define="selected_tab python:view.selected_portal_tab">
         <tal:tabs tal:repeat="tab portal_tabs">
             <li tal:define="tid tab/id"
                 tal:attributes="id string:portaltab-${tid};

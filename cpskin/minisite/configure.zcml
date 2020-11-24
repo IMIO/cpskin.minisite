@@ -74,6 +74,15 @@
         profile="cpskin.minisite:default"
         />
 
+    <genericsetup:upgradeStep
+        title="cpskin.minisite: update viewlet / actions for dropdown configuration"
+        description="Dropdown viewlet becomes always visible (with condition) and with an action to activate"
+        handler=".upgradehandlers.add_minisite_menu"
+        source="0005"
+        destination="0006"
+        profile="cpskin.minisite:default"
+        />
+
     <browser:viewlet
         name="cpskin.minisite"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"

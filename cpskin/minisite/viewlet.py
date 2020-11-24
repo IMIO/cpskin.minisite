@@ -14,6 +14,7 @@ from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.interface import implements
 
+from cpskin.minisite.browser.interfaces import IDropDownMenuActivated
 from cpskin.minisite.browser.interfaces import IHNavigationActivated
 from cpskin.minisite.utils import get_minisite_object
 from cpskin.minisite.utils import url_in_portal_mode
@@ -92,6 +93,10 @@ class MinisiteCatalogNavigationTabs(CatalogNavigationTabs):
 class MinisiteViewletMenu(GlobalSectionsViewlet):
     index = ViewPageTemplateFile('minisite_menu.pt')
 
+    def available(self):
+        return True
+        return IHNavigationActivated.providedBy(self.minisite_root)
+
     def update(self):
         context = aq_inner(self.context)
         portal_tabs_view = getMultiAdapter((context, self.request),
@@ -104,17 +109,14 @@ class MinisiteViewletMenu(GlobalSectionsViewlet):
         self.minisite_root = get_minisite_object(self.request)
         self.actions = actions(self.request)
 
-    def minisite_menu(self):
-        if IHNavigationActivated.providedBy(self.minisite_root):
-            return True
-        else:
-            return False
-
 
 class MinisiteViewletDropdownMenu(ViewletBase):
     implements(INavigationTree)
     index = ViewPageTemplateFile('minisite_dropdown_menu.pt')
     recurse = ViewPageTemplateFile('minisite_dropdown_menu_recurse.pt')
+
+    def available(self):
+        return IDropDownMenuActivated.providedBy(self.minisite_root)
 
     def update(self):
         self.minisite_root = get_minisite_object(self.request)

@@ -7,7 +7,4 @@
   <order manager="plone.abovecontent" skinname="*">
     <viewlet name="cpskin.minisite" />
   </order>
-  <hidden manager="plone.portaltop" skinname="*">
-    <viewlet name="cpskin.minisitedropdownmenu" />
-  </hidden>
 </object>

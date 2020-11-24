@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from cpskin.locales import CPSkinMessageFactory as _
+from cpskin.minisite.browser.interfaces import IDropDownMenuActivationView
+from cpskin.minisite.browser.interfaces import IDropDownMenuActivated
 from cpskin.minisite.browser.interfaces import IHNavigationActivated
 from cpskin.minisite.browser.interfaces import IHNavigationActivationView
 from cpskin.minisite.utils import get_minisite_object
@@ -46,6 +48,23 @@ class MSHorizontalNavigation(BrowserView):
         return self.is_in_minisite_mode and (IHNavigationActivated.providedBy(minisite_root))
 
 
+class MSDropdDownMenu(MSHorizontalNavigation):
+    implements(IDropDownMenuActivationView)
+    """
+    Dropdown menu activation helper view
+    """
+
+    @property
+    def can_enable_dropdown(self):
+        minisite_root = get_minisite_object(self.request)
+        return self.is_in_minisite_mode and not (IDropDownMenuActivated.providedBy(minisite_root))
+
+    @property
+    def can_disable_dropdown(self):
+        minisite_root = get_minisite_object(self.request)
+        return self.is_in_minisite_mode and (IDropDownMenuActivated.providedBy(minisite_root))
+
+
 def _redirect(self, msg=''):
     if self.request:
         if msg:
@@ -65,6 +84,7 @@ class MSHorizontalNavigationEnable(BrowserView):
     def __init__(self, context, request):
         super(MSHorizontalNavigationEnable, self).__init__(context, request)
         alsoProvides(get_minisite_object(request), IHNavigationActivated)
+        noLongerProvides(get_minisite_object(request), IDropDownMenuActivated)
         _redirect(self, msg=_(u'Minisite horizontal Navigation enabled on content'))
 
 
@@ -77,3 +97,26 @@ class MSHorizontalNavigationDisable(BrowserView):
         super(MSHorizontalNavigationDisable, self).__init__(context, request)
         noLongerProvides(get_minisite_object(request), IHNavigationActivated)
         _redirect(self, msg=_(u'Minisite horizontal Navigation disabled on content'))
+
+
+class MSDropdDownMenuEnable(BrowserView):
+    """
+    Dropdown menu activation helper view
+    """
+
+    def __init__(self, context, request):
+        super(MSDropdDownMenuEnable, self).__init__(context, request)
+        alsoProvides(get_minisite_object(request), IDropDownMenuActivated)
+        noLongerProvides(get_minisite_object(request), IHNavigationActivated)
+        _redirect(self, msg=_(u'Minisite dropdown menu enabled on content'))
+
+
+class MSDropdDownMenuDisable(BrowserView):
+    """
+    Dropdown menu activation helper view
+    """
+
+    def __init__(self, context, request):
+        super(MSDropdDownMenuDisable, self).__init__(context, request)
+        noLongerProvides(get_minisite_object(request), IDropDownMenuActivated)
+        _redirect(self, msg=_(u'Minisite dropdown menu disabled on content'))

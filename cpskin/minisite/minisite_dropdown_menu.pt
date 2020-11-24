@@ -1,4 +1,5 @@
 <div id="container-minisite-globalnav"
+     tal:condition="view/available"
      class="minisite-dropdown-menu-container"
      i18n:domain="plone">
 
