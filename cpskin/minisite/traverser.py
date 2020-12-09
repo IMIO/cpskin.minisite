@@ -98,11 +98,13 @@ def redirect(event):
         # it's a view
         logger.debug('Found a view for {0}'.format(first_name))
         return
-    end_of_url = request['URL'].replace(minisite_obj.absolute_url(), '')
+    end_of_url = request['ACTUAL_URL'].replace(minisite_obj.absolute_url(), '')
     # sample : '/agenda/rss_feed_view'
     base_object = None
     if "/" in end_of_url:
-        ends = end_of_url.split("/")
+        # we need to remove views / attribute from minisite object calculation
+        context_end_url = end_of_url.split('@@')[0].strip("/")
+        ends = context_end_url.split("/")
         ends.reverse()
         for end in ends:
             base_object = get_acquired_base_object(minisite_obj, end)

@@ -4,7 +4,8 @@ Changelog
 1.1.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- WEB-3377: Fix traversing redirection where there are views / attributes in URL
+  [laulaz]
 
 
 1.1.7 (2020-09-25)
