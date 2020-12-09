@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.8 (unreleased)
+1.1.8 (2020-12-09)
 ------------------
 
 - WEB-3377: Fix traversing redirection where there are views / attributes in URL
